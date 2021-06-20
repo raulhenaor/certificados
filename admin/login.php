@@ -2,7 +2,7 @@
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
 			<div class="card-header">
-				<h3>Formulario de Ingreso</h3>
+				<h3>FORMULARIO DE INGRESO</h3>
 
 			</div>
 			<div class="card-body">
@@ -11,14 +11,14 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="bi bi-person-fill" style="font-size: 17px;"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="usuario" name="login">
+						<input type="text" class="form-control" placeholder="Usuario" name="login">
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="bi bi-key-fill" style="font-size: 17px;"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="contraseña"name="pass">
+						<input type="password" class="form-control" placeholder="Contraseña"name="pass">
 					</div>
 					<!--<div class="row align-items-center remember">
 						<input type="checkbox">Remember Me
@@ -29,14 +29,14 @@
 					</div>
 				</form>
 			</div>
-			<div class="card-footer">
+			<!--<div class="card-footer">
 				<div class="d-flex justify-content-center links">
 					Ingresar Usuario<a href="#">Ingresar</a>
 				</div>
 				<!--<div class="d-flex justify-content-center">
 					<a href="#">Forgot your password?</a>
-				</div>-->
-			</div>
+				</div>
+			</div>-->
 		</div>
 	</div>
 </div>

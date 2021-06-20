@@ -3,7 +3,7 @@
 $host = 'localhost';
 $username = 'root';
 $passwd = '';
-$dbname = 't_sanpablo';
+$dbname = 'servilog';
 
 /*$conexion = new mysqli($host, $username, $passwd, $dbname);
 

@@ -1,0 +1,60 @@
+/*estilos modal*/
+.Modal {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgb(0,0,0,0.85);
+    display: none;
+}
+
+.Modal2 {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgb(0,0,0,0.85);
+    display: none;
+}
+
+.bodyModal{
+    width: 100%;
+    height: 100%;
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    /*background: #FFF;*/
+}
+
+#form_add_product input , #form_del_product{
+    
+    text-align: center;
+  
+}
+
+#form_del_product .alertAddProduct{
+    margin-bottom: 20px;
+}
+
+#form_add_product .iconoAct , #form_del_product{
+    font-size: 60px;
+    text-align: center;
+    margin: 20px 0px 20px 0px;
+  
+}
+
+#form_del_product p {
+    font-size: 20px;
+}
+
+#form_add_product label{
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+

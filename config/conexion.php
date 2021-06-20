@@ -1,5 +1,5 @@
 <?php
-    $conexion=new PDO ('mysql:host=localhost; dbname=t_sanpablo', 'root', '');
+    $conexion=new PDO ('mysql:host=localhost; dbname=servilog', 'root', '');
     
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
