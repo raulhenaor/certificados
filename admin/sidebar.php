@@ -10,10 +10,10 @@
               </li>
               
                     <li class="sub-menu linea">
-                        <a href="javascript:void(0);"><i class="fas fa-file-signature"></i><span>Insertar Registros</span><i class="arrow fa fa-angle-right posi"></i></a>
+                        <a href="javascript:void(0);"><i class="fas fa-file-signature"></i><span>Registros</span><i class="arrow fa fa-angle-right posi"></i></a>
                         <ul>
-                        <li class="nav-item"><a class="nav-link" href="ingresarBote.php">Registrar Bote</a></li>
-                        <li class="nav-item"><a class="nav-link" href="ingresarTarifa.php">Ingrese Tarifas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="registroCursos.php">Cursos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="registroEstudiantes.php">Estudiantes</a></li>
                         <li class="nav-item"><a class="nav-link" href="ingresarEmpresa.php">Ingresar Empresas</a></li>
                         <li class="nav-item"><a class="nav-link" href="ingresarParentesco.php">Ingresar Parentesco</a></li>
                         <li class="nav-item"><a class="nav-link" href="ingresarTipoPasajero.php">Ingresar Tipo Pasajero</a></li>
