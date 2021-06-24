@@ -14,7 +14,7 @@
                         <ul>
                             <li class="nav-item"><a class="nav-link" href="registroCursos.php">Cursos</a></li>
                             <li class="nav-item"><a class="nav-link" href="registroEstudiantes.php">Estudiantes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="ingresarEmpresa.php">Ingresar Empresas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="registroInstructor.php">Instructor</a></li>
                         <li class="nav-item"><a class="nav-link" href="ingresarParentesco.php">Ingresar Parentesco</a></li>
                         <li class="nav-item"><a class="nav-link" href="ingresarTipoPasajero.php">Ingresar Tipo Pasajero</a></li>
                         <li class="nav-item"><a class="nav-link" href="ingresarTipoDocumento.php">Ingresar Tipo Documento </a></li>
