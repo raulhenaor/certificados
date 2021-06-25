@@ -2,7 +2,7 @@
 
 
 <script src="../js/jquery-3.6.0.min.js" type="text/javascript"></script>
-<script src="../js/funcions.js" type="text/javascript"></script>
+<script src="../js/funtionCursos.js" type="text/javascript"></script>
 <script src="../js/peticionConsultas.js" type="text/javascript"></script>
 <script src="../js/jquery.validate.js" type="text/javascript"></script>
 

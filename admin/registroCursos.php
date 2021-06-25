@@ -106,10 +106,10 @@ include ('../config/conexion.php');
               foreach ($registro as $data):
               ?>
               <tr class="row<?php echo $data->ID?>">
-                  <td class="celReg"><?php echo $data->NORMA?></td>
-                  <td class="celReg"><?php echo $data->NOMBRE_CURSO?></td>
-                  <td class="celNBote"><?php echo $data->HORAS?></td>
-                  <td class="celNpatente"><?php echo $data->CREDITOS?></td>
+                  <td class="celNorma"><?php echo $data->NORMA?></td>
+                  <td class="celNomCurso"><?php echo $data->NOMBRE_CURSO?></td>
+                  <td class="celHoras"><?php echo $data->HORAS?></td>
+                  <td class="celCreditos"><?php echo $data->CREDITOS?></td>
                   <?php
                   $estado_valor = '';
                   if ($data->ACTIVO==1){
@@ -118,15 +118,15 @@ include ('../config/conexion.php');
                       $estado_valor = 'Bloqueado';
                   }
                   ?>
-                  <td class="celNBote"><?php echo $estado_valor?></td>
+                  <td class="celEstado"><?php echo $estado_valor?></td>
                   <?php?>
-                  <td class="celNpatente"><?php echo $data->SIGLA?></td> 
+                  <td class="celSigla"><?php echo $data->SIGLA?></td> 
                     <td>
-                        <a class="add_product btn btn-outline-primary" product="<?php echo $data->ID_BOTE ?>" href="#">
+                        <a class="add_curso btn btn-outline-primary" id_curso="<?php echo $data->ID ?>" href="#">
                         <i class="fas fa-edit"></i></a>
                     </td>
                     <td>
-                        <a class="del_product btn btn-outline-danger" product="<?php echo $data->ID_BOTE ?>" href="#">
+                        <a class="del_curso btn btn-outline-danger" product="<?php echo $data->ID ?>" href="#">
                         <i class="fas fa-trash-alt"></i></a>
                     </td>
               </tr>
