@@ -14,14 +14,11 @@
                         <ul>
                             <li class="nav-item"><a class="nav-link" href="registroCursos.php">Cursos</a></li>
                             <li class="nav-item"><a class="nav-link" href="registroEstudiantes.php">Estudiantes</a></li>
-<<<<<<< HEAD
                             <li class="nav-item"><a class="nav-link" href="registroInstructor.php">Instructor</a></li>
-=======
                         <li class="nav-item"><a class="nav-link" href="registrarTipoDocumento.php">Ingresar Tipo de Documentos</a></li>
                         <li class="nav-item"><a class="nav-link" href="registroUsuarios.php">Registrar Usuarios</a></li>
 
                         <li class="nav-item"><a class="nav-link" href=".php">Ingresar Empresas</a></li>
->>>>>>> Soy Prueba 1.0
                         <li class="nav-item"><a class="nav-link" href="ingresarParentesco.php">Ingresar Parentesco</a></li>
                         <li class="nav-item"><a class="nav-link" href="ingresarTipoPasajero.php">Ingresar Tipo Pasajero</a></li>
                         <li class="nav-item"><a class="nav-link" href="ingresarTipoDocumento.php">Ingresar Tipo Documento </a></li>
