@@ -78,14 +78,14 @@ include ('../config/conexion.php');
               foreach ($registro as $data):
               ?>
               <tr class="row<?php echo $data->ID_DOC?>">                  
-                  <td class="celNBote"><?php echo $data->NOMBRE?></td>                  
+                  <td class="celNombreDocu"><?php echo $data->NOMBRE?></td>                  
                   
                     <td>
-                        <a class="add_product btn btn-outline-primary" product="<?php echo $data->ID_BOTE ?>" href="#">
+                        <a class="add_tipodoc btn btn-outline-primary" id_doc="<?php echo $data->ID_DOC ?>" href="#">
                         <i class="fas fa-edit"></i></a>
                     </td>
                     <td>
-                        <a class="del_product btn btn-outline-danger" product="<?php echo $data->ID_BOTE ?>" href="#">
+                        <a class="del_tipodoc btn-outline-danger" id_doc="<?php echo $data->ID_DOC ?>" href="#">
                         <i class="fas fa-trash-alt"></i></a>
                     </td>
               </tr>

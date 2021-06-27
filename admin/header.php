@@ -44,11 +44,13 @@
     <link href="../recursos/fontawesome-free-5.15.3-web/css/solid.css" rel="stylesheet" type="text/css"/>
     <link href="../css/estilos.css" rel="stylesheet" type="text/css"/>
   </head>
+  <!--cambiar la siguiente linea a <div class="modal Modal"> -->
   <div class="modal Modal">
       <div class="modal-dialog">
         <div class="modal-content ">
           <div class="modal-header">
             <div class="bodyModal ">
+
               <!-- <form  action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataProduct();">
                  <h2>Contenido del Modal</h2>
                  <input type="number" name="registro" id="txtRegistro" class="form-control" placeholder="Registro del Bote"/><br> 
