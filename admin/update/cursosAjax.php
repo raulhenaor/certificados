@@ -63,31 +63,29 @@ if(!empty($_POST)){
 
            
     }//if de la accion
-   /* 
-    // Eliminar producto
-        if($_POST['action']=='delProduct'){
+   
+    // Eliminar Curso
+        if($_POST['action']=='delCurso'){
+            //print_r($_POST);
        //echo 'consultar';
-            if(empty($_POST['id_e']) || !is_numeric($_POST['id_e']) ){
+            if(empty($_POST['id_c']) || !is_numeric($_POST['id_c']) ){
                 echo 'error';
             } else {
-                $idEmpresa = $_POST['id_e'];
-                $usuarioDEL = $_SESSION["id_usuario"];
-                
-                $sqld = mysqli_query($con, "UPDATE empresas SET  ID_USUARIO=$usuarioDEL WHERE ID_E=$idEmpresa");
-                
-                $sql_del = mysqli_query($con, "DELETE FROM empresas WHERE ID_E = $idEmpresa");
+                $id_curso = $_POST['id_c'];
+
+                $sql_del = mysqli_query($con, "DELETE FROM cursos WHERE ID = $id_curso");
                 mysqli_close($con);
                 
                 if($sql_del){
                     echo 'Ok';
                 }else{
-                    //echo 'error';
+                    echo 'error';
                 }
             }
-            echo 'error';
+            //echo 'error';
     }
 
-    exit();*/
+    exit();
 }//post
 // primer if
 //print_r($_POST);

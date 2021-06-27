@@ -126,7 +126,7 @@ include ('../config/conexion.php');
                         <i class="fas fa-edit"></i></a>
                     </td>
                     <td>
-                        <a class="del_curso btn btn-outline-danger" product="<?php echo $data->ID ?>" href="#">
+                        <a class="del_curso btn btn-outline-danger" id_curso="<?php echo $data->ID ?>" href="#">
                         <i class="fas fa-trash-alt"></i></a>
                     </td>
               </tr>

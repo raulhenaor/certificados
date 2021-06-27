@@ -1,5 +1,5 @@
 $(document).ready(function(){
-//Modal From actualizar cursos*********************************************************************
+//Modal From actualizar cursos visulizar información*********************************************************************
 $('.add_curso').click(function(e){
          e.preventDefault();
          
@@ -74,6 +74,59 @@ $('.add_curso').click(function(e){
          $('.Modal').fadeIn();
          
      });
+     
+     // formulario modal que muestra información para eliminar
+     
+   $('.del_curso').click(function(e){
+         e.preventDefault();
+         
+         var id_curso = $(this).attr('id_curso');
+         var action = 'infoCurso';
+   
+         //alert(producto);
+         
+         $.ajax({
+            url:'update/cursosAjax.php',
+            type:'POST',
+            async: true,
+            data:{action: action, id_curso: id_curso},
+  
+            success: function(response) {
+                
+                console.log(response);
+                
+                if(response != 'error'){
+                    
+                    var info = JSON.parse(response);
+                    console.log(info);
+                    
+                    $('.bodyModal').html('<form  action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault(); delCurso();">'+
+                                                '<h2>Eliminar Curso</h2>'+
+                                                '<p>¿Está seguro de Eliminar el Siguiente Curso?</p>'+
+                                                '<h2>'+info.NOMBRE_CURSO+'</h2>'+
+                                          
+                                                '<input type="hidden" name="id_c" id="id_c" value="'+info.ID+'"/>'+
+                                                '<input type="hidden" name="action" value="delCurso"/>'+
+                                                '<div class="alertAddProduct"></div>'+
+                                                
+                                                '<div class="d-grid gap-2 d-md-flex justify-content-md-center">'+
+                                                '<button type="submit" class="btn-del btn btn-outline-danger"><i class="fas fa-trash-alt"></i>Eliminar</button>'+
+                                                '<a href="#" class="closeModal btn btn-outline-success" onclick="closeModal();"><i class="fas fa-times-circle"></i>Cancelar</a>'+
+                                                '</div>'+
+                                          '</form>');
+                }
+            },
+            
+            error: function(error){
+                console.log(error);
+            }
+         });
+         
+         $('.Modal').fadeIn();
+         
+     });    
+     
+     
 });//fin funcion inicia
 
 // Actualizar Boton empresas ************************************************************
@@ -120,6 +173,41 @@ function sendDataCursos(){
     
     $('.alertAddProduct').html('');
         
+}
+
+function delCurso(){
+    var pr = $('#id_c').val();
+    
+    $.ajax({
+            url:'update/cursosAjax.php',
+            type:'POST',
+            async: true,
+            data: $('#form_del_product').serialize(),
+  
+            success: function(response) {
+                    console.log(response);
+               if(response == 'error'){ 
+                    $('.alertAddProduct').html('<div class="alert alert-danger" alert-dismissible fade show" role="alert">No se Puede Eliminar Esta Relacionado<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                }else{
+                      
+                      $('.row' + pr).remove();
+                      $('#form_del_product .btn-del').remove();
+                
+                    //location.reload();
+                   
+                       $('.alertAddProduct').html('<div class="alert alert-success" alert-dismissible fade show" role="alert">Eliminado Corretamente<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                }
+
+            },
+            
+            error: function(error){
+                console.log(error); 
+                
+            }
+         });
+    
+    $('.alertAddProduct').html('');
+    
 }
 
 function closeModal(){
