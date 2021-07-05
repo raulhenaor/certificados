@@ -1,5 +1,5 @@
 <?php
-    session_start();
+ session_start();
    if(!isset($_SESSION["usuario"]) || !isset($_SESSION["id_usuario"])){
    header("location:../index.php");
    }

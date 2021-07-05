@@ -1,20 +1,15 @@
+<?php ob_start(); ?>
 <?php 
 include 'header.php';
 include 'nabvar-menu.php';
 ?>  
-
 <!--*******************************************************SideBar***************************************************************-->
 <div class="container-fluid">
-  <div class="row">
-      
-<?php 
-include 'sidebar.php';
-?> 
+  <div class="row">    
+<?php include 'sidebar.php';?> 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 <?php
 include ('../config/conexion.php');
-
-   
          /*INICIO CONUSLTA PARA EL CRUD*/
     $registro=$conexion->query("SELECT ID_INST, instructor.TIPO_DOC, tipo_documento.NOMBRE AS TIPO_NOM, instructor.DOCUMENTO, instructor.NOMBRE, APELLIDO, CONTACTO, PROFESION, MATRICULA, ESPECIALIDAD, DESCRIPCION,FIRMA,ACTIVO 
                                 FROM instructor 
@@ -53,9 +48,9 @@ include ('../config/conexion.php');
                  /*Validar fichero si existe*/
                 if (file_exists($carpeta_destino.$nombre_imagen)){
                     
-                          echo "<div class='alert danger'>";
-                          echo "<span class='closebtnAlert'>&times;</span> ";
+                          echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
                           echo "El fichero $nombre_fichero ya existe";
+                          echo "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
                           echo "</div>";
                    
                   }else{
@@ -69,24 +64,24 @@ include ('../config/conexion.php');
 
                     $resultado->execute(array(":doc"=>$tipo_doc, ":documento"=>$cc, ":nom"=>$nom, ":ape"=>$ape, ":contac"=>$contacto, ":profesion"=>$profesion
                             , ":matricula"=>$matricula, ":especialidad"=>$especialidad, ":desc"=>$descrip, ":firma"=>$nombre_imagen, ":user"=>$id_usuario, ":activo"=>$activo));    
-                        //echo $carpeta_destino;
+                  
                     header("Location:registroInstructor.php");
 
                     $resultado->closeCursor(); 
                 }//cierre del else si se cumple la condición para insertar
             } else {// Cirre el if del tipo de archivo y abro el else para alert
                 
-            		echo "<div class='alert danger'>";
-			echo "<span class='closebtnAlert'>&times;</span> ";
+            		echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
 			echo "Solo se pueden subir archivos .png";
-			echo "</div>";   
+			echo "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
+			echo "</div>";  
                         
             }//cierre del else alert de extensión del archivo
         } else {//cierre del if tamaño del archivo y abro else para el alert
             
-            		echo "<div class='alert danger'>";
-			echo "<span class='closebtnAlert'>&times;</span> ";
+            		echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
 			echo "Png muy grande max 1 mb";
+                        echo "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
 			echo "</div>";
             
         }//cierre del else del if condición del tamaño del archivo
@@ -94,6 +89,123 @@ include ('../config/conexion.php');
 }//cierre if del boton del formulario
     
 ?>
+  <div class="modal Modal">
+      <div class="modal-dialog">
+        <div class="modal-content ">
+          <div class="modal-header">
+            <div class="bodyModal ">
+                
+            <form action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataInstructor();" enctype="multipart/form-data">
+                <div class="iconoAct text-success"><i class="fas fa-edit"></i></div>
+                    <h3>ACTUALIZAR REGISTRO INSTRUCTOR</h3><br>
+                <div class="row">
+                    
+                    <div class="col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Tipo Documento</label>
+                    
+                        <select class="form-select" id="tipo_doc1" name="tipo_doc1">
+	                    <?php 
+	                      include ('../config/conexion1.php');
+	                      $consulta = mysqli_query($con, "SELECT ID_DOC,NOMBRE FROM tipo_documento");
+	                        while ($valores = mysqli_fetch_row($consulta)){            
+	                        echo '<option  value="'.$valores[0].'" >'.$valores[1].'</option>';
+	                        
+	                        }?>
+                    </select>
+                        
+                        <div id="" class="form-text">Ingrese el Tipo de Documento.</div>
+                    </div>  
+                    <div class="col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Documento No.</label>
+                        <input type="number" class="form-control" id="documento1" name="documento1" placeholder="Ingrese Solo Números" required="">
+                        <div id="" class="form-text">Documento de Identidad.</div>
+                    </div>
+                </div><!-- cierre row -->
+               <div class="row gy-5">
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre1" name="nombre1" placeholder="">
+                        <div id="" class="form-text">Ingrese Nombre del Instructor.</div>
+                    </div>
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido1" name="apellido1" placeholder="">
+                        <div id="" class="form-text">Ingrese El Apellido del Instructor.</div>
+                    </div>
+                </div><!-- cierre row -->   
+                
+                <div class="row gy-5">
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Contacto</label>
+                        <input type="number" class="form-control" id="cel1" name="cel1" placeholder="">
+                        <div id="" class="form-text">Ingrese Número de Celular del Instructor.</div>
+                    </div>
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Profesión</label>
+                        <input type="text" class="form-control" id="profesion1" name="profesion1" placeholder="">
+                        <div id="" class="form-text">Profesión del Instructor</div>
+                    </div>
+                </div><!-- cierre row -->  
+                
+                 <div class="row gy-5">
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Matricula</label>
+                        <input type="text" class="form-control" id="matricula1" name="matricula1" placeholder="">
+                        <div id="" class="form-text">Matricula del Instructor.</div>
+                    </div>
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Especialidad</label>
+                        <input type="text" class="form-control" id="especialidad1" name="especialidad1" placeholder="">
+                        <div id="" class="form-text">Especialidad del Instructor</div>
+                    </div>
+                </div><!-- cierre row --> 
+                
+                                 <div class="row gy-5">
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descp1" name="descp1" placeholder="">
+                        <div id="" class="form-text">Descripción del Instructor.</div>
+                    </div>
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Estado</label>
+                        <select class="form-select" aria-label=".form-select-lg example" id="activo1" name="activo1"> 
+                              <option value="1">Activo</option>
+                              <option value="2">Bloqueado</option>
+                            </select>
+                        <div id="" class="form-text">Estado del Curso.</div>
+                    </div>
+                </div><!-- cierre row --> 
+                
+                <div class="row gy-5">
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Firma</label>
+                        <p></p>
+                        <center>
+                        <img alt="" width="100px" height="50px" id="firma2">
+                        </center>
+                        <input type="file" class="form-control" id="file" name="file">
+                        <div id="" class="form-text">Firma del Instructor en png</div>
+                        
+                    </div>
+
+                </div><!-- cierre row --> 
+                <input type="hidden" name="id_instructor" id="id_instructor" value=""/>
+                <input type="hidden" name="action" value="addInstructor"/>
+                <div class="alertAddProduct"></div>
+                <p></p>
+                  <button type="submit" class="btn btn-outline-primary">Actualizar</button>
+                  <a href="#" class="closeModal btn btn-outline-primary" onclick="closeModal1();">Cerrar</a>
+                   
+                </form>
+  
+
+  
+            </div>
+          </div>
+       </div>
+    </div>
+  </div>        
+        
         <!--******************************Encabezado*****************************-->
      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         
@@ -174,7 +286,7 @@ include ('../config/conexion.php');
                     </div>
                     <div class="col col-sm">
                         <label for="exampleFormControlInput1" class="form-label">Firma</label>
-                        <input type="file" class="form-control" id="firma" name="firma" placeholder="" required="">
+                        <input type="file" class="form-control" id="firma" name="firma" placeholder="" >
                         <div id="" class="form-text">Firma del Instructor en png</div>
                     </div>
                 </div><!-- cierre row --> 
@@ -231,15 +343,15 @@ include ('../config/conexion.php');
               foreach ($registro as $data):
               ?>
               <tr class="row<?php echo $data->ID_INST?>">
-                  <td class="celReg"><?php echo $data->TIPO_NOM?></td>
-                  <td class="celReg"><?php echo $data->DOCUMENTO?></td>
-                  <td class="celNBote"><?php echo $data->NOMBRE?></td>
-                  <td class="celNpatente"><?php echo $data->APELLIDO?></td>
-                  <td class="celNpatente"><?php echo $data->CONTACTO?></td>
-                  <td class="celNpatente"><?php echo $data->PROFESION?></td>
-                  <td class="celNpatente"><?php echo $data->MATRICULA?></td>
-                  <td class="celNpatente"><?php echo $data->ESPECIALIDAD?></td>
-                  <td class="celNpatente"><?php echo $data->DESCRIPCION?></td>
+                  <td class="celTipoNom"><?php echo $data->TIPO_NOM?></td>
+                  <td class="celCc"><?php echo $data->DOCUMENTO?></td>
+                  <td class="celNombre"><?php echo $data->NOMBRE?></td>
+                  <td class="celApellido"><?php echo $data->APELLIDO?></td>
+                  <td class="celCel"><?php echo $data->CONTACTO?></td>
+                  <td class="celProfesion"><?php echo $data->PROFESION?></td>
+                  <td class="celMatricula"><?php echo $data->MATRICULA?></td>
+                  <td class="celEspe"><?php echo $data->ESPECIALIDAD?></td>
+                  <td class="celDescrip"><?php echo $data->DESCRIPCION?></td>
                   <?php
                   $estado_valor = '';
                   if ($data->ACTIVO==1){
@@ -248,15 +360,15 @@ include ('../config/conexion.php');
                       $estado_valor = 'Bloqueado';
                   }
                   ?>
-                  <td class="celNBote"><?php echo $estado_valor?></td>
-                  <td class="celNpatente"><img src="/servilog/intranet/uploads/<?php echo $data->FIRMA?>" alt="" width="100px" height="50px"></td>
+                  <td class="celActivo"><?php echo $estado_valor?></td>
+                  <td class="celFirma"><img src="/servilog/intranet/uploads/<?php echo $data->FIRMA?>" alt="" width="100px" height="50px" id="firma3"></td>
                   <?php?>
                     <td>
-                        <a class="add_product btn btn-outline-primary" product="<?php echo $data->ID_BOTE ?>" href="#">
+                        <a class="add_instructor btn btn-outline-primary" id_instructor="<?php echo $data->ID_INST ?>" href="#">
                         <i class="fas fa-edit"></i></a>
                     </td>
                     <td>
-                        <a class="del_product btn btn-outline-danger" product="<?php echo $data->ID_BOTE ?>" href="#">
+                        <a class="del_instructor btn btn-outline-danger" id_instructor="<?php echo $data->ID_INST ?>" href="#">
                         <i class="fas fa-trash-alt"></i></a>
                     </td>
               </tr>
@@ -270,4 +382,4 @@ include ('../config/conexion.php');
   </div>
 </div>
 <?php include 'footer.php'?>
-
+<?php ob_end_flush(); ?>

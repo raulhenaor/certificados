@@ -64,7 +64,7 @@
                         </ul>
                    </li><!--///////////////////CIERRE LI DE SUB MENU-->
                   <li class="linea">
-                      <a class="nav-link" href="ingresarPlanilla.php"><i class="fas fa-file-invoice"></i>Ingresar Planilla</a>
+                      <a class="nav-link" href="registroEmpresa.php"><i class="fas fa-file-invoice"></i>Datos Empresa</a>
                   </li>
                     <li class="linea">
                         <a class="nav-link" href="ingresarUsuarios.php"><i class="fas fa-user-lock"></i>Ingresar Usuario </a>
@@ -72,10 +72,7 @@
 
             </ul><!-- //////////////////CIERRE UL DE LEFT NAVEGACION//////////////////// -->
           </div>  <!-- //////////////////CIERRE DIC DE LEFT NAVEGACION//////////////////// -->
-            
-
-
-
+ 
         </ul>
 
 
