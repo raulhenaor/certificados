@@ -58,6 +58,27 @@ if(!empty($_POST)){
 
            
     }//if de la accion
+
+
+    if($_POST['action']=='delDocu'){
+        //print_r($_POST);
+   //echo 'consultar';
+        if(empty($_POST['id_c']) || !is_numeric($_POST['id_c']) ){
+            echo 'error';
+        } else {
+            $id_doc = $_POST['id_c'];
+
+            $sql_del = mysqli_query($con, "DELETE FROM tipo_documento WHERE ID_DOC = $id_doc");
+            mysqli_close($con);
+            
+            if($sql_del){
+                echo 'Ok';
+            }else{
+                echo 'error';
+            }
+        }
+        //echo 'error';
+}
    /* 
     // Eliminar producto
         if($_POST['action']=='delProduct'){

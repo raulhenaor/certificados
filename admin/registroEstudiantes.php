@@ -22,6 +22,66 @@ include ('../config/conexion.php');
                                 ORDER by estudiantes.ID LIMIT 15")->fetchAll(PDO::FETCH_OBJ);
     
 ?>
+<div class="modal Modal">
+      <div class="modal-dialog">
+        <div class="modal-content ">
+          <div class="modal-header">
+            <div class="bodyModal ">  
+<form  action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataEstudiantes();">
+                                                <div class="iconoAct text-success"><i class="fas fa-edit"></i></div>
+                                                <h3>ACTUALIZAR DATOS DE ESTUDIANTE</h3><br>
+                                                <div class="row">
+                                                <div class="col-sm">
+                                                <label for="exampleFormControlInput1" class="form-label">TIPO DE DOCUMENTO:</label>
+                                                
+                                                <select class="form-select" id="tipo_doc" name="tipo_doc">
+                                                    <?php 
+                                                    include ('../config/conexion1.php');
+                                                    $consulta = mysqli_query($con, "SELECT ID_DOC,NOMBRE FROM tipo_documento");
+                                                        while ($valores = mysqli_fetch_row($consulta)){            
+                                                        echo '<option  value="'.$valores[0].'" >'.$valores[1].'</option>';
+                                                        
+                                                        }?>
+                                                </select>
+                                                </div>
+                                                <div class="col-sm">
+                                                <label for="exampleFormControlInput1" class="form-label">NÚMERO DE DOCUMENTO:</label>
+                                                <input type="number" name="documento" id="documento" class="form-control" value="" placeholder="Registro del Bote"/><br> 
+                                                </div>
+                                                </div>
+                                                <label for="exampleFormControlInput1" class="form-label">NOMBRES:</label>
+                                                <input type="text" name="nombre" id="nombre" class="form-control" value="" placeholder="Nombre del Bote"/><br> 
+                                                
+                                                <label for="exampleFormControlInput1" class="form-label">APELLIDOS:</label>
+                                                <input type="text" name="apellido" id="apellido" class="form-control" value="" placeholder="Nombre de la Patente"/><br> 
+                                                
+                                                <label for="exampleFormControlInput1" class="form-label">CONTACTO:</label>
+                                                <input type="number" name="cel" id="cel" class="form-control" value="" placeholder="Nombre de la Patente"/><br> 
+                                                
+
+                                                <label for="exampleFormControlInput1" class="form-label">EMAIL:</label> 
+                                                <input type="email" name="correo" id="correo" class="form-control" value="" placeholder="Nombre de la Patente"/><br> 
+
+                                                <label for="exampleFormControlInput1" class="form-label">ESTADO:</label>
+                                                <select name="activo" class="form-select" id="activo">
+                                                    <option value="0">BLOQUEADO</option>
+                                                    <option value="1">ACTIVO</option>
+                                                </select>
+                                                
+                                                <input type="hidden" name="id_estudiante" id="id_estudiante" value=""/>
+                                                <input type="hidden" name="action" value="addEstudiante"/>
+                                                <div class="alertAddProduct"></div>
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button type="submit" class="btn btn-outline-success">Actualizar</button>
+                                                <a href="#" class="closeModal btn btn-outline-success" onclick="closeModal();">Cerrar</a>
+                                                </div>
+                                          </form> 
+
+                                          </div>
+          </div>
+       </div>
+    </div>
+  </div>
         <!--******************************Encabezado*****************************-->
      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         
@@ -129,12 +189,12 @@ include ('../config/conexion.php');
               foreach ($registro as $data):
               ?>
               <tr class="row<?php echo $data->ID?>">
-                  <td class="celReg"><?php echo $data->TIPO_DOCUMENTO?></td>
-                  <td class="celReg"><?php echo $data->DOCUMENTO?></td>
-                  <td class="celNBote"><?php echo $data->NOMBRE?></td>
-                  <td class="celNpatente"><?php echo $data->APELLIDO?></td>
-                  <td class="celNpatente"><?php echo $data->CEL?></td>
-                  <td class="celNpatente"><?php echo $data->CORREO?></td>
+                  <td class="celTipodoc"><?php echo $data->TIPO_DOCUMENTO?></td>
+                  <td class="celDocu"><?php echo $data->DOCUMENTO?></td>
+                  <td class="celNombre"><?php echo $data->NOMBRE?></td>
+                  <td class="celApellido"><?php echo $data->APELLIDO?></td>
+                  <td class="celCelu"><?php echo $data->CEL?></td>
+                  <td class="celCorreo"><?php echo $data->CORREO?></td>
                   <?php
                   $estado_valor = '';
                   if ($data->ACTIVO==1){
@@ -143,14 +203,14 @@ include ('../config/conexion.php');
                       $estado_valor = 'Bloqueado';
                   }
                   ?>
-                  <td class="celNBote"><?php echo $estado_valor?></td>
+                  <td class="celEstado"><?php echo $estado_valor?></td>
                   <?php?>
                     <td>
-                        <a class="add_product btn btn-outline-primary" product="<?php echo $data->ID_BOTE ?>" href="#">
+                        <a class="add_estudiantes btn btn-outline-primary" id_estudiante="<?php echo $data->ID ?>" href="#">
                         <i class="fas fa-edit"></i></a>
                     </td>
                     <td>
-                        <a class="del_product btn btn-outline-danger" product="<?php echo $data->ID_BOTE ?>" href="#">
+                        <a class="del_estudiantes btn btn-outline-danger" id_estudiante="<?php echo $data->ID ?>" href="#">
                         <i class="fas fa-trash-alt"></i></a>
                     </td>
               </tr>
