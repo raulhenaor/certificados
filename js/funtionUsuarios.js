@@ -1,20 +1,18 @@
 $(document).ready(function(){
 //Modal From actualizar cursos*********************************************************************
-$('.add_tipodoc').click(function(e){
+$('.add_usuario').click(function(e){
          e.preventDefault();
 
-         
-         
-         var id_doc = $(this).attr('id_doc');
-         var action = 'infoTipoDoc';
+         var id_usu = $(this).attr('usuario');
+         var action = 'infoUsuario';
          //alert (id_doc);
          
          
          $.ajax({
-            url:'update/tipoDocAjax.php',
+            url:'update/UsuarioAjax.php',
             type:'POST',
             async: true,
-            data:{action: action, id_doc: id_doc},
+            data:{action: action, id_usu: id_usu},
   
             success: function(response) {
                 
@@ -25,22 +23,19 @@ $('.add_tipodoc').click(function(e){
                     //información traida del php
                     var info = JSON.parse(response);
                     console.log(info);
+
+                    $('#tipo_doc').val(info.TIPO_DOC);
+                    $('#documento').val(info.CEDULA);
+                    $('#nombre').val(info.NOMBRE);
+                    $('#apellido').val(info.APELLIDO);
+                    $('#correo').val(info.CORREO);
+                    $('#pass').val(info.CONTRASENA);
+                    $('#activo').val(info.ACTIVO);
+                    $('#perfil').val(info.PERFIL);
+                    $('#id_usuario').val(info.ID_USU);
                     
                     
-                    
-                    $('.bodyModal').html('<form  action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataTipoDoc();">'+
-                                                '<div class="iconoAct text-success"><i class="fas fa-edit"></i></div>'+
-                                                '<h3>ACTUALIZAR REGISTRO TIPO DOCUMENTO</h3><br> '+
-                                                '<label for="exampleFormControlInput1" class="form-label">NOMBRE DEL CURSO:</label>'+
-                                                '<input type="text" name="nom_docu" id="nom_docu" class="form-control" value="'+info.NOMBRE+'" placeholder="Nombre del Documento"/><br>'+
-                                                '<input type="hidden" name="id_doc" id="id_doc" value="'+info.ID_DOC+'"/>'+
-                                                '<input type="hidden" name="action" value="addTipoDoc"/>'+
-                                                '<div class="alertAddProduct"></div>'+
-                                                '<div class="d-grid gap-2 d-md-flex justify-content-md-end">'+
-                                                '<button type="submit" class="btn btn-outline-success">Actualizar</button>'+
-                                                '<a href="#" class="closeModal btn btn-outline-success" onclick="closeModal();">Cerrar</a>'+
-                                                '</div>'+
-                                        '</form>');   
+                     
                 }
             },
             
@@ -54,21 +49,21 @@ $('.add_tipodoc').click(function(e){
      });
 
 
-     $('.del_tipodoc').click(function(e){
+     $('.del_usuario').click(function(e){
         e.preventDefault();
         
         
-        var id_tipodoc = $(this).attr('id_doc');
-        var action = 'infoTipoDoc';
+        var id_usuario = $(this).attr('usuario');
+        var action = 'infoUsuario';
         
   
         //alert(producto);
         
         $.ajax({
-           url:'update/tipoDocAjax.php',
+           url:'update/UsuarioAjax.php',
            type:'POST',
            async: true,
-           data:{action: action, id_doc: id_tipodoc},
+           data:{action: action, id_usu: id_usuario},
  
            success: function(response) {
                
@@ -79,13 +74,13 @@ $('.add_tipodoc').click(function(e){
                    var info = JSON.parse(response);
                    console.log(info);
                    
-                   $('.bodyModal').html('<form  action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault(); delCurso();">'+
-                                               '<h2>Eliminar Curso</h2>'+
-                                               '<p>¿Está seguro de Eliminar el Siguiente Documento?</p>'+
+                   $('.bodyModal').html('<form  action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault(); delUsu();">'+
+                                               '<h2>Eliminar Usuario</h2>'+
+                                               '<p>¿Está seguro de Eliminar el Siguiente Usuario?</p>'+
                                                '<h2>'+info.NOMBRE+'</h2>'+
                                          
-                                               '<input type="hidden" name="id_c" id="id_c" value="'+info.ID_DOC+'"/>'+
-                                               '<input type="hidden" name="action" value="delDocu"/>'+
+                                               '<input type="hidden" name="id_usuario" id="id_usuario" value="'+info.ID_USU+'"/>'+
+                                               '<input type="hidden" name="action" value="delUsuario"/>'+
                                                '<div class="alertAddProduct"></div>'+
                                                
                                                '<div class="d-grid gap-2 d-md-flex justify-content-md-center">'+
@@ -111,11 +106,11 @@ $('.add_tipodoc').click(function(e){
 
 
 // Actualizar Boton empresas ************************************************************
-function sendDataTipoDoc(){
+function sendDataUsuarios(){
     
    
      $.ajax({
-            url:'update/tipoDocAjax.php',
+            url:'update/UsuarioAjax.php',
             type:'POST',
             async: true, 
             //nunca cambiar esta hp línea           
@@ -127,7 +122,29 @@ function sendDataTipoDoc(){
                     $('.alertAddProduct').html('<p style="color:red">Error al Actualizar</p>');
                 }else{
                       var info = JSON.parse(response);
-                      $('.row' + info.ID_DOC + ' .celNombreDocu').html(info.NOMBRE);
+
+                      if (info.PERFIL == 1) {
+                          var perr = 'Admin';
+
+                      }
+
+                      if (info.ACTIVO == 0) {
+                        var esta1= "Bloqueado";
+
+                    } else {
+                      var esta1 = "Activo";
+                    }
+
+
+
+                      $('.row' + info.ID_USU + ' .celTipoDoc').html(info.NOMBREDOCU);
+                      $('.row' + info.ID_USU + ' .celCedu').html(info.CEDULA);
+                      $('.row' + info.ID_USU + ' .celNombre').html(info.NOMBRE);
+                      $('.row' + info.ID_USU + ' .celApellido').html(info.APELLIDO);
+                      $('.row' + info.ID_USU + ' .celCorreo').html(info.CORREO);
+                      $('.row' + info.ID_USU + ' .celPerfil').html(perr);
+                      $('.row' + info.ID_USU + ' .celActivo').html(esta1);
+
                        
                 
                     //location.reload();
@@ -146,11 +163,11 @@ function sendDataTipoDoc(){
         
 }
 
-function delCurso(){
-    var pr = $('#id_c').val();
+function delUsu(){
+    var pr = $('#id_usuario').val();
     
     $.ajax({
-            url:'update/tipoDocAjax.php',
+            url:'update/UsuarioAjax.php',
             type:'POST',
             async: true,
             data: $('#form_del_product').serialize(),

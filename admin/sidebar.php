@@ -68,7 +68,7 @@
                   </li>
                     <li class="linea">
                         <a class="nav-link" href="ingresarUsuarios.php"><i class="fas fa-user-lock"></i>Ingresar Usuario </a>
-                    </li> 
+                    </li>  
 
             </ul><!-- //////////////////CIERRE UL DE LEFT NAVEGACION//////////////////// -->
           </div>  <!-- //////////////////CIERRE DIC DE LEFT NAVEGACION//////////////////// -->

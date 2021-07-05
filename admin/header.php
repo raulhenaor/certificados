@@ -10,16 +10,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="generator"">
-
+    <meta name="generator">
+   
+    <link rel="shortcut icon" href="https://servilog.co/wp-content/uploads/2020/11/favicon.png?v=a8def514be8a">
+    
     <title>SERVILOG</title>
+    
     
     <link href="../css/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- Favicons -->
-
+    
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -49,7 +52,7 @@
       <div class="modal-dialog">
         <div class="modal-content ">
           <div class="modal-header">
-            <div class="bodyModal ">
+            <div class="bodyModal ">    
 
               <!-- <form  action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataProduct();">
                  <h2>Contenido del Modal</h2>
