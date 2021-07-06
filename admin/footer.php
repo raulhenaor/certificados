@@ -5,7 +5,7 @@
 <script src="../js/funtionCursos.js" type="text/javascript"></script>
 <script src="../js/funtionTipoDocumento.js" type="text/javascript"></script>
 <script src="../js/funtionInstructor.js" type="text/javascript"></script>
-<script src="../js/funtionEmpresa.js" type="text/javascript"></script>
+
 <script src="../js/funtionUsuarios.js" type="text/javascript"></script>
 <script src="../js/funtionEstudiantes.js" type="text/javascript"></script>
 <script src="../js/peticionConsultas.js" type="text/javascript"></script>
