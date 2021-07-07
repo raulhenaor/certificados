@@ -16,10 +16,13 @@ include ('../config/conexion.php');
 
    
          /*INICIO CONUSLTA PARA EL CRUD*/
-    $registro=$conexion->query("SELECT estudiantes.ID, estudiantes.TIPO_DOC, tipo_documento.NOMBRE AS TIPO_DOCUMENTO, DOCUMENTO, estudiantes.NOMBRE, APELLIDO, CEL, CORREO, ACTIVO 
-                                FROM estudiantes 
-                                INNER JOIN tipo_documento ON estudiantes.TIPO_DOC = tipo_documento.ID_DOC
-                                ORDER by estudiantes.ID LIMIT 15")->fetchAll(PDO::FETCH_OBJ);
+    $registro=$conexion->query("SELECT ID_CER, ID_CURSO,cursos.NOMBRE_CURSO, cursos.HORAS, cursos.SIGLA, CODIGO, ID_ESTUDIANTE, estudiantes.DOCUMENTO ,estudiantes.NOMBRE AS NOM_EST, estudiantes.APELLIDO AS APE_EST, ID_INSTRUCTOR, instructor.NOMBRE AS NOM_INST, instructor.APELLIDO AS APE_INST, instructor.PROFESION, instructor.MATRICULA, instructor.ESPECIALIDAD, instructor.FIRMA, F_INCIAL,F_APROBACION, F_VENCIMIENTO, ID_EMPRESA,empresa.NOMBRE_EMPRESA, empresa.WEB, empresa.TEL_UNO, empresa.TEL_DOS , empresa.LOGO, APROBADO, NOTIFICADO 
+        FROM certificado_curso 
+        INNER JOIN estudiantes ON estudiantes.ID = certificado_cursO.ID_ESTUDIANTE
+        INNER JOIN instructor ON instructor.ID_INST = certificado_curso.ID_INSTRUCTOR
+        INNER JOIN cursos ON cursos.ID = certificado_curso.ID_CURSO
+        INNER JOIN empresa ON empresa.ID_EMP = certificado_curso.ID_EMPRESA
+                                ORDER by ID_CER LIMIT 15")->fetchAll(PDO::FETCH_OBJ);
     
 ?>
 <div class="modal Modal">
@@ -216,13 +219,15 @@ include ('../config/conexion.php');
       <table class="table table-striped table-hover">
           <thead>
               <tr>
-                <th>Tipo Documento</th>
-                <th>Documento</th>
-                <th>Nombre</th>
-                <th>Apellido</th> 
-                <th>Celular</th>
-                <th>E-mail</th>
+                <th>Certificado No</th>
+                <th>Nombre del Curso</th>
+                <th>Estudiante</th>
+                <th>Intructor</th>
+                <th>F. Inicial</th> 
+                <th>F.Aprobación</th>
+                <th>F. Vencimiento</th>
                 <th>Estado</th>
+                <th>Ver Pdf</th>
                 <th>Actualizar</th> 
                 <th>Eliminar</th> 
               </tr>
@@ -231,23 +236,20 @@ include ('../config/conexion.php');
               <?php 
               foreach ($registro as $data):
               ?>
-              <tr class="row<?php echo $data->ID?>">
-                  <td class="celTipodoc"><?php echo $data->TIPO_DOCUMENTO?></td>
-                  <td class="celDocu"><?php echo $data->DOCUMENTO?></td>
-                  <td class="celNombre"><?php echo $data->NOMBRE?></td>
-                  <td class="celApellido"><?php echo $data->APELLIDO?></td>
-                  <td class="celCelu"><?php echo $data->CEL?></td>
-                  <td class="celCorreo"><?php echo $data->CORREO?></td>
-                  <?php
-                  $estado_valor = '';
-                  if ($data->ACTIVO==1){
-                      $estado_valor = 'Activo';
-                  }else{
-                      $estado_valor = 'Bloqueado';
-                  }
-                  ?>
-                  <td class="celEstado"><?php echo $estado_valor?></td>
+              <tr class="row<?php echo $data->ID_CER?>">
+                  <td class="celTipodoc"><?php echo $data->SIGLA.$data->CODIGO?></td>
+                  <td class="celDocu"><?php echo $data->NOMBRE_CURSO?></td>
+                  <td class="celNombre"><?php echo $data->NOM_EST?></td>
+                  <td class="celApellido"><?php echo $data->NOM_INST?></td>
+                  <td class="celCelu"><?php echo $data->F_INCIAL?></td>
+                  <td class="celCorreo"><?php echo $data->F_APROBACION?></td>
+                  <td class="celEstado"><?php echo $data->F_VENCIMIENTO?></td>
+                  <td class="celEstado"><?php echo $data->APROBADO?></td>
                   <?php?>
+                   <td>
+                        <a class="btn btn-outline-success" product="" href="pdf/certificadoPdf.php?id_certificado=<?php echo  $data->ID_CER?>">
+                        <i class="fas fa-file-download"></i></a>
+                    </td>
                     <td>
                         <a class="add_estudiantes btn btn-outline-primary" id_estudiante="<?php echo $data->ID ?>" href="#">
                         <i class="fas fa-edit"></i></a>
