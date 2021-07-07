@@ -245,8 +245,7 @@ include ('../config/conexion.php');
                   }
                   ?>
                   <td class="celPerfil11"><?php echo $esta_perfil?></td>
-                  <td class="celActivo"><?php echo $estado_valor?></td>
-                  <?php?>
+                  <td class="celActivo"><?php echo $estado_valor?></td>                  
                     <td>
                         <a class="add_usuario btn btn-outline-primary" usuario="<?php echo $data->ID_USU ?>" href="#">
                         <i class="fas fa-edit"></i></a>

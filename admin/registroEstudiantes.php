@@ -204,7 +204,6 @@ include ('../config/conexion.php');
                   }
                   ?>
                   <td class="celEstado"><?php echo $estado_valor?></td>
-                  <?php?>
                     <td>
                         <a class="add_estudiantes btn btn-outline-primary" id_estudiante="<?php echo $data->ID ?>" href="#">
                         <i class="fas fa-edit"></i></a>

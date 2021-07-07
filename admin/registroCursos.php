@@ -119,7 +119,6 @@ include ('../config/conexion.php');
                   }
                   ?>
                   <td class="celEstado"><?php echo $estado_valor?></td>
-                  <?php?>
                   <td class="celSigla"><?php echo $data->SIGLA?></td> 
                     <td>
                         <a class="add_curso btn btn-outline-primary" id_curso="<?php echo $data->ID ?>" href="#">

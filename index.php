@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -82,3 +83,4 @@ if (isset($_POST["enviare"])){
 ?>
     </body>
 </html>
+<?php ob_end_flush(); ?>

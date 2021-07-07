@@ -64,7 +64,7 @@ if(empty($_POST['buscarPasajero'])){
 
 $consulta = "SELECT ID_CER, ID_CURSO,cursos.NOMBRE_CURSO, cursos.HORAS, cursos.SIGLA, CODIGO, ID_ESTUDIANTE, estudiantes.DOCUMENTO ,estudiantes.NOMBRE AS NOM_EST, estudiantes.APELLIDO AS APE_EST, ID_INSTRUCTOR, instructor.NOMBRE AS NOM_INST, instructor.APELLIDO AS APE_INST, instructor.PROFESION, instructor.MATRICULA, instructor.ESPECIALIDAD, instructor.FIRMA, F_INCIAL,F_APROBACION, F_VENCIMIENTO, ID_EMPRESA,empresa.NOMBRE_EMPRESA, empresa.WEB, empresa.TEL_UNO, empresa.TEL_DOS , empresa.LOGO, APROBADO, NOTIFICADO 
 FROM certificado_curso 
-INNER JOIN estudiantes ON estudiantes.ID = certificado_cursO.ID_ESTUDIANTE
+INNER JOIN estudiantes ON estudiantes.ID = certificado_curso.ID_ESTUDIANTE
 INNER JOIN instructor ON instructor.ID_INST = certificado_curso.ID_INSTRUCTOR
 INNER JOIN cursos ON cursos.ID = certificado_curso.ID_CURSO
 INNER JOIN empresa ON empresa.ID_EMP = certificado_curso.ID_EMPRESA

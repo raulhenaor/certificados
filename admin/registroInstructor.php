@@ -362,8 +362,7 @@ include ('../config/conexion.php');
                   ?>
                   <td class="celActivo"><?php echo $estado_valor?></td>
                   <td class="celFirma"><img src="/servilog/intranet/uploads/<?php echo $data->FIRMA?>" alt="" width="100px" height="50px" id="firma3"></td>
-                  <?php?>
-                    <td>
+                  <td>
                         <a class="add_instructor btn btn-outline-primary" id_instructor="<?php echo $data->ID_INST ?>" href="#">
                         <i class="fas fa-edit"></i></a>
                     </td>
