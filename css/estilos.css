@@ -64,11 +64,20 @@
 }
 
 .contenedorCurso{
-    margin: 50px auto;
+   /* margin: 50px auto;
     border: 2px solid #1f4e82;
     border-radius: 10px;
     width: 500px;
-    height: 500px;
+    height: 500px;*/
+    
+    	width: 100%;
+	max-width: 500px;
+        padding: 50px; 
+	margin: 0 auto;
+        border: 2px solid #1f4e82;
+        
+         border-radius: 10px;
+	overflow: hidden;
 }
 
 .tituloCurso{
@@ -82,15 +91,31 @@
     margin-top: 0;
 }
 
-.formularioTamaño{
-    width: 400px;
-    margin: 0 auto;
-}
+
 
 form .btn-color{
     background-color:#1f4e82;
     color: white;
    
+}
+
+@media screen and (max-width:800px) {
+
+  .main .texto1{
+    width: 100%;
+  }
+  aside {
+
+    width: 100%;
+  }
+  
+}
+
+@media screen and (max-width: 400px) {
+
+.contenedor{
+    width: 100%;
+      }
 }
 
 /*table, th, td {

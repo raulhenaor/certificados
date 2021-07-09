@@ -1,15 +1,8 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-  <title>ERROR</title>
-</head>
+<?php ob_start(); ?>
 <?php
 session_start();
 include '../../config/conexion1.php';
 include '../../config/conexion.php';
-
 
 if (isset($_POST['enviando'])){
 
@@ -33,7 +26,7 @@ if (isset($_POST['enviando'])){
          if ($aprobado == 1) {
             $consulta = mysqli_query($con, "SELECT certificado_curso.ID_CURSO, cursos.SIGLA ,MAX(certificado_curso.CODIGO)  FROM certificado_curso INNER JOIN cursos ON certificado_curso.ID_CURSO = cursos.ID WHERE cursos.ID=$id_curso");
             while ($valores = mysqli_fetch_row($consulta)){            
-            echo '<option  value="'.$valores[0].'" >'.$valores[1].' '.$valores[2].'</option>';
+            //echo '<option  value="'.$valores[0].'" >'.$valores[1].' '.$valores[2].'</option>';
             $hola = $valores[2];
             if ($hola==-1) {
                $codigo = $hola+2;
@@ -50,13 +43,13 @@ if (isset($_POST['enviando'])){
 
          }
       }
-      echo($codigo);
+      //echo($id_usuario);echo($id_usuario);
 
  try{
 
    
    
-    $consulta="INSERT INTO certificado_curso (ID_CURSO, CODIGO, ID_ESTUDIANTE, ID_INSTRUCTOR, F_INCIAL, 	F_APROBACION, F_VENCIMIENTO, ID_EMPRESA, APROBADO, NOTIFICADO, ID_USER) VALUES "
+    $consulta="INSERT INTO certificado_curso (ID_CURSO, CODIGO, ID_ESTUDIANTE, ID_INSTRUCTOR, F_INCIAL, F_APROBACION, F_VENCIMIENTO, ID_EMPRESA, APROBADO, NOTIFICADO, ID_USER) VALUES "
             . "(:id_curso, :codigo, :id_estudiante, :id_instructor, :f_inicial, :f_aprobacion, :f_vencimiento, :id_empresa, :aprobado, :notificado, :id_user)";
     
     $resultado=$conexion->prepare($consulta);   
@@ -79,6 +72,13 @@ if (isset($_POST['enviando'])){
     $resultado->closeCursor();
  }catch (Exception $ex) {
 ?>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <title>ERROR</title>
+</head>
    <body>
        <div class="container">
      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -97,10 +97,11 @@ if (isset($_POST['enviando'])){
             } 
             }//if de ingreso
             ?> 
-           <a href="../registroEstudiantes.php" class="btn btn-warning">Regresar</a>
+           <a href="../registroCertificados.php" class="btn btn-warning">Regresar</a>
            
        </div>
        <script src="../../js/jquery-3.6.0.min.js" type="text/javascript"></script>
        <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
    </body>
 </html>
+<?php ob_end_flush(); ?>

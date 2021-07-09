@@ -79,7 +79,7 @@ $('.add_tipodoc').click(function(e){
                    var info = JSON.parse(response);
                    console.log(info);
                    
-                   $('.bodyModal').html('<form  action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault(); delCurso();">'+
+                   $('.bodyModal').html('<form  action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault(); delTipoDoc();">'+
                                                '<h2>Eliminar Curso</h2>'+
                                                '<p>¿Está seguro de Eliminar el Siguiente Documento?</p>'+
                                                '<h2>'+info.NOMBRE+'</h2>'+
@@ -146,7 +146,7 @@ function sendDataTipoDoc(){
         
 }
 
-function delCurso(){
+function delTipoDoc(){
     var pr = $('#id_c').val();
     
     $.ajax({

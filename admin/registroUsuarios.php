@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php 
 include 'header.php';
 include 'nabvar-menu.php';
@@ -60,12 +61,7 @@ include ('../config/conexion.php');
                                                 
                                                 <label for="exampleFormControlInput1" class="form-label">CORREO:</label>
                                                 <input type="email" name="correo" id="correo" class="form-control" value="" placeholder="Celular"/><br> 
-                                                
-
-                                                <label for="exampleFormControlInput1" class="form-label">CONTRASEÑA:</label> 
-                                                <input type="password" name="pass" id="pass" class="form-control" value="" placeholder="Digita la Contraseña"/><br> 
-
-                                                
+                                                                                                
                                                 <div class="row">
                                                 <div class="col-sm">
                                                 <label for="exampleFormControlInput1" class="form-label">ESTADO:</label>
@@ -265,3 +261,4 @@ include ('../config/conexion.php');
   </div>
 </div>
 <?php include 'footer.php'?>
+<?php ob_end_flush(); ?>

@@ -48,11 +48,11 @@ if(!empty($_POST)){
                  
              }
  
-             if(!empty($_FILES['file-0'])){
+             if(!empty($_FILES['files-0'])){
             //Datos del archivo
-            $nombre_imagen=$_FILES['file-0']['name'];
-            $tipo_imagen=$_FILES['file-0']['type'];
-            $tamano_imagen=$_FILES['file-0']['size'];
+            $nombre_imagen=$_FILES['files-0']['name'];
+            $tipo_imagen=$_FILES['files-0']['type'];
+            $tamano_imagen=$_FILES['files-0']['size'];
             
             $nombre_fichero=$nombre_imagen;
                  $carpeta_destino=$_SERVER ['DOCUMENT_ROOT'] . '/servilog/intranet/uploads/';
@@ -66,7 +66,7 @@ if(!empty($_POST)){
                          }else{
                             
                           unlink($carpeta_destino.$valorFImra);
-                         move_uploaded_file($_FILES['file-0']['tmp_name'],$carpeta_destino.$nombre_imagen);
+                         move_uploaded_file($_FILES['files-0']['tmp_name'],$carpeta_destino.$nombre_imagen);
                          }
    
                      } else {

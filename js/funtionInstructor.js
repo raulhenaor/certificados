@@ -31,7 +31,7 @@ $('.add_instructor').click(function(e){
                     $('#cel1').val(info.CONTACTO);
                     $('#profesion1').val(info.PROFESION);
                     $('#matricula1').val(info.MATRICULA);                    
-                    $('#especialidad1').val(info.MATRICULA);
+                    $('#especialidad1').val(info.ESPECIALIDAD);
                     $('#descp1').val(info.DESCRIPCION);
                     $('#activo1').val(info.ACTIVO);
                     document.getElementById("firma2").src = "/servilog/intranet/uploads/"+info.FIRMA;

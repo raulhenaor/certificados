@@ -18,7 +18,7 @@ include ('../config/conexion.php');
           <div class="modal-header">
             <div class="bodyModal ">
                 
-            <form action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataInstructor();" enctype="multipart/form-data">
+            <form action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataEmpresa();" enctype="multipart/form-data">
                 <div class="iconoAct text-success"><i class="fas fa-edit"></i></div>
                     <h3>ACTUALIZAR REGISTRO EMPRESA</h3><br>
                 <div class="row">
@@ -153,7 +153,7 @@ include ('../config/conexion.php');
                     </tr>
                      <tr class="row<?php echo $data->ID_EMP?>">
                         <th>LOGO</th>
-                        <td class="celLogo"><img src="/servilog/intranet/uploads/<?php echo $data->LOGO?>" alt="LOGO" width="300px" height="92px"  id="firma3"></td> 
+                        <td class="celLogo"><img src="/servilog/intranet/uploads/<?php echo $data->LOGO?>" alt="LOGO" width="300px" height="92px"  id="logo3"></td> 
                     </tr>
                     <tr>
                         <th>EDITAR</th>

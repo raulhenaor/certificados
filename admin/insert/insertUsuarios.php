@@ -1,10 +1,4 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-  <title>ERROR</title>
-</head>
+<?php ob_start(); ?>
 <?php
 session_start();
 include '../../config/conexion.php';
@@ -46,6 +40,13 @@ if (isset($_POST['enviando'])){
     $resultado->closeCursor();
  }catch (Exception $ex) {
 ?>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <title>ERROR</title>
+</head>
    <body>
        <div class="container">
      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -71,3 +72,4 @@ if (isset($_POST['enviando'])){
        <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
    </body>
 </html>
+<?php ob_end_flush(); ?>

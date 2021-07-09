@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php 
 include 'header.php';
 include 'nabvar-menu.php';
@@ -18,8 +19,8 @@ include ('../config/conexion.php');
          /*INICIO CONUSLTA PARA EL CRUD*/
     $registro=$conexion->query("SELECT ID_CER, ID_CURSO,cursos.NOMBRE_CURSO, cursos.HORAS, cursos.SIGLA, CODIGO, ID_ESTUDIANTE, estudiantes.DOCUMENTO ,estudiantes.NOMBRE AS NOM_EST, estudiantes.APELLIDO AS APE_EST, ID_INSTRUCTOR, instructor.NOMBRE AS NOM_INST, instructor.APELLIDO AS APE_INST, instructor.PROFESION, instructor.MATRICULA, instructor.ESPECIALIDAD, instructor.FIRMA, F_INCIAL,F_APROBACION, F_VENCIMIENTO, ID_EMPRESA,empresa.NOMBRE_EMPRESA, empresa.WEB, empresa.TEL_UNO, empresa.TEL_DOS , empresa.LOGO, APROBADO, NOTIFICADO 
         FROM certificado_curso 
-        INNER JOIN estudiantes ON estudiantes.ID = certificado_curso.ID_ESTUDIANTE
-        INNER JOIN instructor ON instructor.ID_INST = certificado_curso.ID_INSTRUCTOR
+        INNER JOIN estudiantes ON estudiantes.DOCUMENTO = certificado_curso.ID_ESTUDIANTE
+        INNER JOIN instructor ON instructor.DOCUMENTO = certificado_curso.ID_INSTRUCTOR
         INNER JOIN cursos ON cursos.ID = certificado_curso.ID_CURSO
         INNER JOIN empresa ON empresa.ID_EMP = certificado_curso.ID_EMPRESA
                                 ORDER by ID_CER LIMIT 15")->fetchAll(PDO::FETCH_OBJ);
@@ -59,9 +60,6 @@ include ('../config/conexion.php');
                                                         
                                                         }?>
                                                 </select>
-
-
-
                                                 <label for="exampleFormControlInput1" class="form-label">NÚMERO DE DOCUMENTO:</label>
                                                 <input type="number" name="documento" id="documento" class="form-control" value="" placeholder="Registro del Bote"/><br> 
                                                 </div>
@@ -127,41 +125,20 @@ include ('../config/conexion.php');
                         <div id="" class="form-text">Curso del estudiante.</div>
                     </div>  
                     <div class="col-sm">
-                    <label for="exampleFormControlInput1" class="form-label">Seleccione el Estudiante</label>
-                    <select class="form-select" id="id_estudiante" name="id_estudiante">
-	                    <?php 
-	                      include ('../config/conexion1.php');
-	                      $consulta = mysqli_query($con, "SELECT ID, NOMBRE, APELLIDO FROM estudiantes");
-	                        while ($valores = mysqli_fetch_row($consulta)){            
-	                        echo '<option  value="'.$valores[0].'" >'.$valores[1].' '.$valores[2].'</option>';
-	                        
-	                        }?>
-                    </select>
-                        
-
-
-                        <div id="" class="form-text">Seleccione el estudiante</div>
+                    <label for="exampleFormControlInput1" class="form-label">Ingrese Documento</label>
+                    <input type="text" class="form-control" name="id_estudiante" id="busqueda" placeholder="Buscar...">    
+                    <div id="" class="form-text">Seleccione el estudiante</div>
                     </div>
                 </div><!-- cierre row -->
                <div class="row gy-5">
                     <div class="col col-sm">
 
-                    <label for="exampleFormControlInput1" class="form-label">Seleccione el Instructor</label>
-                    <select class="form-select" id="id_instructor" name="id_instructor">
-	                    <?php 
-	                      include ('../config/conexion1.php');
-	                      $consulta = mysqli_query($con, "SELECT ID_INST, NOMBRE, APELLIDO FROM instructor");
-	                        while ($valores = mysqli_fetch_row($consulta)){            
-	                        echo '<option  value="'.$valores[0].'" >'.$valores[1].' '.$valores[2].'</option>';
-	                        
-	                        }?>
-                    </select>
-                        
-
-
+                        <label for="exampleFormControlInput1" class="form-label">Seleccione el Instructor</label>
+                        <input type="text" class="form-control" name="id_instructor" id="busquedaFamiliar" placeholder="Buscar...">
                         <div id="" class="form-text">Seleccione el instructor</div>
                        
                     </div>
+                   
                     <div class="col col-sm">
                     <label for="exampleFormControlInput1" class="form-label">Seleccione si Aprobó</label>
 
@@ -170,11 +147,8 @@ include ('../config/conexion.php');
                         <option value="2">No Aprobó</option>
                     </select>
                        
-                        </div>
-                    
-                        
-                       
-                    
+                    </div>
+   
                 </div><!-- cierre row -->   
                 
                 <div class="row gy-5">
@@ -205,6 +179,13 @@ include ('../config/conexion.php');
                 </form>           
           
         </div><!<!-- Cierre container -->
+        
+        	<section id="tabla_resultado">
+		<!-- AQUI SE DESPLEGARA NUESTRA TABLA DE CONSULTA -->
+		</section
+                <section id="tabla_resultado_instruc">
+		<!-- AQUI SE DESPLEGARA NUESTRA TABLA DE CONSULTA -->
+		</section  
         
                 <!--******************************Lista de Botes encabezado*****************************-->
      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -246,7 +227,7 @@ include ('../config/conexion.php');
                   <td class="celEstado"><?php echo $data->F_VENCIMIENTO?></td>
                   <td class="celEstado"><?php echo $data->APROBADO?></td>
                   <td>
-                        <a class="btn btn-outline-success" product="" href="pdf/certificadoPdf.php?id_certificado=<?php echo  $data->ID_CER?>">
+                        <a class="btn btn-outline-success" product="" href="pdf/certificadoPdf.php?id_certificado=<?php echo $data->ID_CER?>">
                         <i class="fas fa-file-download"></i></a>
                     </td>
                     <td>
@@ -268,3 +249,4 @@ include ('../config/conexion.php');
   </div>
 </div>
 <?php include 'footer.php'?>
+<?php ob_end_flush(); ?>

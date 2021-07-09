@@ -27,8 +27,8 @@ class pdf extends FPDF
         
         $consulta = "SELECT ID_CER, ID_CURSO,cursos.NOMBRE_CURSO, cursos.HORAS, cursos.SIGLA, CODIGO, ID_ESTUDIANTE, estudiantes.DOCUMENTO ,estudiantes.NOMBRE AS NOM_EST, estudiantes.APELLIDO AS APE_EST, ID_INSTRUCTOR, instructor.NOMBRE AS NOM_INST, instructor.APELLIDO AS APE_INST, instructor.PROFESION, instructor.MATRICULA, instructor.ESPECIALIDAD, instructor.FIRMA, F_INCIAL,F_APROBACION, F_VENCIMIENTO, ID_EMPRESA,empresa.NOMBRE_EMPRESA, empresa.WEB, empresa.TEL_UNO, empresa.TEL_DOS , empresa.LOGO, APROBADO, NOTIFICADO 
         FROM certificado_curso 
-        INNER JOIN estudiantes ON estudiantes.ID = certificado_curso.ID_ESTUDIANTE
-        INNER JOIN instructor ON instructor.ID_INST = certificado_curso.ID_INSTRUCTOR
+        INNER JOIN estudiantes ON estudiantes.DOCUMENTO = certificado_curso.ID_ESTUDIANTE
+        INNER JOIN instructor ON instructor.DOCUMENTO = certificado_curso.ID_INSTRUCTOR
         INNER JOIN cursos ON cursos.ID = certificado_curso.ID_CURSO
         INNER JOIN empresa ON empresa.ID_EMP = certificado_curso.ID_EMPRESA
         WHERE ID_CER=:id_cer";
@@ -92,8 +92,8 @@ $pdf->AddPage();
 
 $consulta = "SELECT ID_CER, ID_CURSO,cursos.NOMBRE_CURSO, cursos.HORAS, cursos.SIGLA, CODIGO, ID_ESTUDIANTE, estudiantes.DOCUMENTO ,estudiantes.NOMBRE AS NOM_EST, estudiantes.APELLIDO AS APE_EST, ID_INSTRUCTOR, instructor.NOMBRE AS NOM_INST, instructor.APELLIDO AS APE_INST, instructor.PROFESION, instructor.MATRICULA, instructor.ESPECIALIDAD, instructor.FIRMA, F_INCIAL,F_APROBACION, F_VENCIMIENTO, ID_EMPRESA,empresa.NOMBRE_EMPRESA, empresa.WEB, empresa.TEL_UNO, empresa.TEL_DOS , empresa.LOGO, APROBADO, NOTIFICADO 
 FROM certificado_curso 
-INNER JOIN estudiantes ON estudiantes.ID = certificado_curso.ID_ESTUDIANTE
-INNER JOIN instructor ON instructor.ID_INST = certificado_curso.ID_INSTRUCTOR
+INNER JOIN estudiantes ON estudiantes.DOCUMENTO = certificado_curso.ID_ESTUDIANTE
+INNER JOIN instructor ON instructor.DOCUMENTO = certificado_curso.ID_INSTRUCTOR
 INNER JOIN cursos ON cursos.ID = certificado_curso.ID_CURSO
 INNER JOIN empresa ON empresa.ID_EMP = certificado_curso.ID_EMPRESA
 WHERE ID_CER=:id_cer";  
@@ -140,17 +140,16 @@ $pdf->SetFont('RobotoCondensed-Bold', '', 18);
 $pdf->SetTextColor('253','195', '0');
 $pdf->Cell(0, 0, 'Intensidad Horaria:'.' '. utf8_decode($fila['HORAS']).' '.'HORAS', 0, '', 'C', false);
 
-$f_aprobacion = $fila['F_APROBACION'];
-$f_aprobacion = date("m/d/y");
-$f_vencimieto = $fila['F_VENCIMIENTO'];
-$f_vencimieto = date("m/d/y");
+$f_aprobacion = date_create($fila['F_APROBACION']);
+
+$f_vencimieto = date_create($fila['F_VENCIMIENTO']);
 
 $pdf->SetFont('RobotoCondensed-Bold', '', 12);
 $pdf->SetTextColor('77','77', '77');
 $pdf->SetY(115); 
 $pdf->Cell(0, 6, utf8_decode('La presente certificación electrónica tiene validez jurídica y legal en Colombia conforme a la ley 597 de 1999 y el Decreto reglamentario'), 0, '0', 'C', false);
 $pdf->Ln();
-$pdf->Cell(0, 6, utf8_decode('1747 del 2000. En testimonio de lo anterior se firma digitalmente el presente en Barrancabermeja el '. $f_aprobacion.'.'), 0, '0', 'C', false);
+$pdf->Cell(0, 6, utf8_decode('1747 del 2000. En testimonio de lo anterior se firma digitalmente el presente en Barrancabermeja el '. date_format($f_aprobacion, 'd/m/y').'.'), 0, '0', 'C', false);
 
 $pdf->SetY(145);
 $pdf->SetX(15);
@@ -162,11 +161,11 @@ $pdf->Cell(40,6, utf8_decode('SLCAP'.$fila['SIGLA'].sprintf("%'.05d\n", $fila['C
 $pdf->SetTextColor('31','77', '131');
 $pdf->Cell(50,6, utf8_decode('FECHA APROBACIÓN:'), 0, '', 'C');
 $pdf->SetTextColor('253','195', '0');        
-$pdf->Cell(26,6, utf8_decode($f_aprobacion), 0, '', 'C');
+$pdf->Cell(26,6, utf8_decode(date_format($f_aprobacion, 'd/m/y')), 0, '', 'C');
 $pdf->SetTextColor('31','77', '131');
 $pdf->Cell(50,6, utf8_decode('FECHA VENCIMIENTO:'), 0, '', 'C');
 $pdf->SetTextColor('253','195', '0'); 
-$pdf->Cell(26,6, utf8_decode($f_vencimieto), 0, '', 'C');
+$pdf->Cell(26,6, utf8_decode(date_format($f_vencimieto, 'd/m/y')), 0, '', 'C');
 
 
 }

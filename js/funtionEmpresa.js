@@ -53,11 +53,11 @@ $('.add_empresa').click(function(e){
 });//fin funcion inicia
 
 // Actualizar Boton empresas ************************************************************
-function sendDataInstructor(){
+function sendDataEmpresa(){
     
 var data = new FormData();
 jQuery.each($('input[type=file]')[0].files, function(i, file) {
-    data.append('file-'+i, file);
+    data.append('files-'+i, file);
 });
 var other_data = $('#form_add_product').serializeArray();
 $.each(other_data,function(key,input){
@@ -95,7 +95,7 @@ jQuery.ajax({
                       $('.row' + info.ID_EMP + ' .celRepren').html(info.REPRESENTANTE);
 
                       
-                      $('.row' + info.ID_EMP + ' .celLogo #firma3').attr('src', '/servilog/intranet/uploads/'+info.LOGO);
+                      $('.row' + info.ID_EMP + ' .celLogo #logo3').attr('src', '/servilog/intranet/uploads/'+info.LOGO);
                       $('#logo2').attr('src', "/servilog/intranet/uploads/"+info.LOGO);
                       
                        
@@ -113,7 +113,7 @@ jQuery.ajax({
          });
     
     $('.alertAddProduct').html('');
-        
+     
 }
 
 

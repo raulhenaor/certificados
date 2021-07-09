@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php 
 include 'header.php';
 include 'nabvar-menu.php';
@@ -223,3 +224,4 @@ include ('../config/conexion.php');
   </div>
 </div>
 <?php include 'footer.php'?>
+<?php ob_end_flush(); ?>

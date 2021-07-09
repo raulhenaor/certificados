@@ -85,7 +85,7 @@ $('.add_usuario').click(function(e){
                                                
                                                '<div class="d-grid gap-2 d-md-flex justify-content-md-center">'+
                                                '<button type="submit" class="btn-del btn btn-outline-danger"><i class="fas fa-trash-alt"></i>Eliminar</button>'+
-                                               '<a href="#" class="closeModal btn btn-outline-success" onclick="closeModal();"><i class="fas fa-times-circle"></i>Cancelar</a>'+
+                                               '<a href="#" class="closeModal btn btn-outline-success" onclick="closeModal1();"><i class="fas fa-times-circle"></i>Cancelar</a>'+
                                                '</div>'+
                                          '</form>');
                }
@@ -207,4 +207,10 @@ function closeModal(){
     
     $('.Modal').fadeOut();
     //location.reload();
+}
+
+function closeModal1(){
+    $('.alertAddProduct').html('');
+    $('.Modal').fadeOut();
+    location.reload();
 }
