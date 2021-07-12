@@ -194,7 +194,7 @@ include ('../config/conexion.php');
                 <div class="alertAddProduct"></div>
                 <p></p>
                   <button type="submit" class="btn btn-outline-primary">Actualizar</button>
-                  <a href="#" class="closeModal btn btn-outline-primary" onclick="closeModal1();">Cerrar</a>
+                  <a href="#" class="closeModal btn btn-outline-primary" onclick="closeModal();">Cerrar</a>
                    
                 </form>
   
@@ -313,13 +313,13 @@ include ('../config/conexion.php');
                 <!--******************************Lista de Botes encabezado*****************************-->
      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         
-        <h2 class="h2">Lista de Últimos 15 Estudiantes Registrados</h2>
+        <h2 class="h2">Lista de Últimos 15 Instructores Registrados</h2>
         <div class="btn-toolbar mb-2 mb-md-0">
         </div>
       </div>
                 
  <div class="container">
-      <div class="row">           
+      <div class="row table-responsive">           
       <table class="table table-striped table-hover">
           <thead>
               <tr>

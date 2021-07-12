@@ -1,18 +1,18 @@
 $(document).ready(function(){
 //Modal From actualizar cursos visulizar información*********************************************************************
-$('.add_instructor').click(function(e){
+$('.add_certificado').click(function(e){
          e.preventDefault();
          
-         var id_instructor = $(this).attr('id_instructor');
-         var action = 'infoInstructor';
+         var id_certificado = $(this).attr('id_certificado');
+         var action = 'infoCertificado';
          
-         //alert(id_instructor);
+         //alert(id_certificado);
          
          $.ajax({
-            url:'update/intructorcAjax.php',
+            url:'update/certificadoAjax.php',
             type:'POST',
             async: true,
-            data:{action: action, id_instructor: id_instructor},
+            data:{action: action, id_certificado: id_certificado},
   
             success: function(response) {
                 
@@ -23,18 +23,17 @@ $('.add_instructor').click(function(e){
                     var info = JSON.parse(response);
                     console.log(info);
                     
-                    $('#id_instructor').val(info.ID_INST);
-                    $('#tipo_doc1').val(info.TIPO_DOC);
-                    $('#documento1').val(info.DOCUMENTO);
-                    $('#nombre1').val(info.NOMBRE);
-                    $('#apellido1').val(info.APELLIDO);
-                    $('#cel1').val(info.CONTACTO);
-                    $('#profesion1').val(info.PROFESION);
-                    $('#matricula1').val(info.MATRICULA);                    
-                    $('#especialidad1').val(info.ESPECIALIDAD);
-                    $('#descp1').val(info.DESCRIPCION);
-                    $('#activo1').val(info.ACTIVO);
-                    document.getElementById("firma2").src = "/servilog/intranet/uploads/"+info.FIRMA;
+                    $('#id_curso1').val(info.ID_CURSO);
+                    $('#busqueda1').val(info.DOC_EST);
+                    $('#busquedaFamiliar1').val(info.DOC_INST);
+                   
+                    $('#aprobo1').val(info.APROBADO);
+                    $('#fecha_ini').val(info.F_INCIAL);
+                    $('#fechaapro1').val(info.F_APROBACION);
+                    $('#fechaven1').val(info.F_VENCIMIENTO);
+                    $('#id_certificado1').val(info.ID_CER);                    
+  
+                   
                     
                 }
             },
@@ -50,19 +49,19 @@ $('.add_instructor').click(function(e){
      
      // formulario modal que muestra información para eliminar
      
-   $('.del_instructor').click(function(e){
+   $('.del_certificado').click(function(e){
          e.preventDefault();
          
-         var id_instructor = $(this).attr('id_instructor');
-         var action = 'infoInstructor';
+         var id_certificado = $(this).attr('id_certificado');
+         var action = 'infoCertificado';
    
          //alert(producto);
          
          $.ajax({
-            url:'update/intructorcAjax.php',
+            url:'update/certificadoAjax.php',
             type:'POST',
             async: true,
-            data:{action: action, id_instructor: id_instructor},
+            data:{action: action, id_certificado: id_certificado},
   
             success: function(response) {
                 
@@ -73,13 +72,13 @@ $('.add_instructor').click(function(e){
                     var info = JSON.parse(response);
                     console.log(info);
                     
-                    $('.bodyModal').html('<form  action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault(); delInstructor();">'+
-                                                '<h2>Eliminar Instructor</h2>'+
-                                                '<p>¿Está seguro de Eliminar el Siguiente Instructor?</p>'+
-                                                '<h2>'+info.NOMBRE+' '+info.APELLIDO+'</h2>'+
+                    $('.bodyModal').html('<form  action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault(); delCertificado();">'+
+                                                '<h2>Eliminar Certificado</h2>'+
+                                                '<p>¿Está seguro de Eliminar el Siguiente Certificado?</p>'+
+                                                '<h2>'+info.NOM_EST+' '+info.APE_EST+'</h2>'+
                                           
-                                                '<input type="hidden" name="id_inst" id="id_inst" value="'+info.ID_INST+'"/>'+
-                                                '<input type="hidden" name="action" value="delInstructor"/>'+
+                                                '<input type="hidden" name="id_cert" id="id_cert" value="'+info.ID_CER+'"/>'+
+                                                '<input type="hidden" name="action" value="delCertificado"/>'+
                                                 '<div class="alertAddProduct"></div>'+
                                                 
                                                 '<div class="d-grid gap-2 d-md-flex justify-content-md-center">'+
@@ -103,58 +102,29 @@ $('.add_instructor').click(function(e){
 });//fin funcion inicia
 
 // Actualizar Boton empresas ************************************************************
-function sendDataInstructor(){
+function sendDataCertificados(){
     
-var data = new FormData();
-jQuery.each($('input[type=file]')[0].files, function(i, file) {
-    data.append('file-'+i, file);
-});
-var other_data = $('#form_add_product').serializeArray();
-$.each(other_data,function(key,input){
-    data.append(input.name,input.value);
-});
+    var activo='';
     
-jQuery.ajax({
-    url: 'update/intructorcAjax.php',
-    data: data,
-    cache: false,
-    contentType: false,
-    processData: false,
-    type: 'POST',    
-     /*$.ajax({
-            url:'update/intructorcAjax.php',
+     $.ajax({
+            url:'update/certificadoAjax.php',
             type:'POST',
             async: true,
-            data: $('#form_add_product').serialize(),*/
-            
+            data: $('#form_add_product').serialize(),
+  
             success: function(response) {
                     console.log(response);
                 if(response == 'error'){
                     $('.alertAddProduct').html('<p style="color:red">Error al Actualizar</p>');
-                }else if(response == 'error1'){
-                    $('.alertAddProduct').html('<p style="color:red">Error Imagen Tamaño 1-MEGA, PNG y/o existente </p>');
                 }else{
                       var info = JSON.parse(response);
-                      $('.row' + info.ID_INST + ' .celTipoNom').html(info.TIPO_NOM);
-                      $('.row' + info.ID_INST + ' .celCc').html(info.DOCUMENTO);
-                      $('.row' + info.ID_INST + ' .celNombre').html(info.NOMBRE);
-                      $('.row' + info.ID_INST + ' .celApellido').html(info.APELLIDO);
-                      $('.row' + info.ID_INST + ' .celCel').html(info.CONTACTO);
-                      $('.row' + info.ID_INST + ' .celProfesion').html(info.PROFESION);
-                      $('.row' + info.ID_INST + ' .celMatricula').html(info.MATRICULA);
-                      $('.row' + info.ID_INST + ' .celEspe').html(info.ESPECIALIDAD);
-                      $('.row' + info.ID_INST + ' .celDescrip').html(info.DESCRIPCION);
-                      if(info.ACTIVO==1){
-                          activo='Activo'
-                      }else{
-                          activo='Bloqueado'
-                      }
-                      $('.row' + info.ID_INST + ' .celActivo').html(activo);
-                      
-                      $('.row' + info.ID_INST + ' .celFirma #firma3').attr('src', '/servilog/intranet/uploads/'+info.FIRMA);
-                      $('#firma2').attr('src', "/servilog/intranet/uploads/"+info.FIRMA);
-                      
-                       
+                      $('.row' + info.ID_CER + ' .celNomCur').html(info.NOMBRE_CURSO);
+                      $('.row' + info.ID_CER + ' .celNomEst').html(info.NOM_EST);
+                      $('.row' + info.ID_CER + ' .celNomInst').html(info.NOM_INST);
+                      $('.row' + info.ID_CER + ' .celFinicial').html(info.F_INCIAL);
+                      $('.row' + info.ID_CER + ' .celFapro').html(info.F_APROBACION);
+                      $('.row' + info.ID_CER + ' .celFVenci').html(info.F_VENCIMIENTO);
+                      $('.row' + info.ID_CER + ' .celAprobado').html(info.APROBADO);
                 
                     //location.reload();
                    
@@ -172,11 +142,11 @@ jQuery.ajax({
         
 }
 
-function delInstructor(){
-    var pr = $('#id_inst').val();
+function delCertificado(){
+    var pr = $('#id_cert').val();
     
     $.ajax({
-            url:'update/intructorcAjax.php',
+            url:'update/certificadoAjax.php',
             type:'POST',
             async: true,
             data: $('#form_del_product').serialize(),

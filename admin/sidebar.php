@@ -39,13 +39,13 @@
                             <li class="nav-item"><a class="nav-link" href="ingresarMotorista.php">Ingresar Motorista</a></li>
                         </ul>
                    </li><!--///////////////////CIERRE LI DE SUB MENU--> 
-                   <!--<li class="sub-menu linea">
+                   <li class="sub-menu linea">
                         <a href="javascript:void(0);"><i class="fas fa-search"></i><span>Consultas</span><i class="arrow fa fa-angle-right posi"></i></a>
                         <ul>
-                            <li class="nav-item"><a class="nav-link" href="consultarPlanillas.php">Consultar Planilla</a></li>
-                            <li class="nav-item"><a class="nav-link" href="consultaPasajeros.php">Consultar Pasajeros</a></li>
-                            <li class="nav-item"><a class="nav-link" href="consultaFamiliar.php">Consultar Familiar</a></li>
-                            <li class="nav-item"><a class="nav-link" href="consultaMotorista.php">Consultar Motorista</a></li>
+                            <li class="nav-item"><a class="nav-link" href="consultaEstudiante.php">Consultar Estudiante</a></li>
+                            <li class="nav-item"><a class="nav-link" href="consultaInstructor.php">Consultar Instructor</a></li>
+                            <li class="nav-item"><a class="nav-link" href="consultaCertificado.php">Consultar Certificado</a></li>
+                            
                         </ul>
                    </li><!--///////////////////CIERRE LI DE SUB MENU-->
                    <!--<li class="sub-menu linea">

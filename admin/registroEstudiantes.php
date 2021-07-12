@@ -20,7 +20,7 @@ include ('../config/conexion.php');
     $registro=$conexion->query("SELECT estudiantes.ID, estudiantes.TIPO_DOC, tipo_documento.NOMBRE AS TIPO_DOCUMENTO, DOCUMENTO, estudiantes.NOMBRE, APELLIDO, CEL, CORREO, ACTIVO 
                                 FROM estudiantes 
                                 INNER JOIN tipo_documento ON estudiantes.TIPO_DOC = tipo_documento.ID_DOC
-                                ORDER by estudiantes.ID LIMIT 15")->fetchAll(PDO::FETCH_OBJ);
+                                ORDER by estudiantes.ID DESC LIMIT 15")->fetchAll(PDO::FETCH_OBJ);
     
 ?>
 <div class="modal Modal">

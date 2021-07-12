@@ -18,6 +18,46 @@ class pdf extends FPDF
         $this->Image('../../intranet/uploads/footer.png', 0,26, 280, 190, 'PNG');
         
         $this->Image('../../intranet/uploads/bordeHace.png', 101,42, 78, 7, 'PNG');
+        
+                require '../../config/conexion.php';
+        
+        $buscar = $_GET['id_certificado'];
+        
+        $consulta = "SELECT ID_CER, ID_CURSO,cursos.NOMBRE_CURSO, cursos.HORAS, cursos.SIGLA, CODIGO, ID_ESTUDIANTE, estudiantes.DOCUMENTO ,estudiantes.NOMBRE AS NOM_EST, estudiantes.APELLIDO AS APE_EST, ID_INSTRUCTOR, instructor.NOMBRE AS NOM_INST, instructor.APELLIDO AS APE_INST, instructor.PROFESION, instructor.MATRICULA, instructor.ESPECIALIDAD, instructor.FIRMA, F_INCIAL,F_APROBACION, F_VENCIMIENTO, ID_EMPRESA,empresa.NOMBRE_EMPRESA, empresa.WEB, empresa.TEL_UNO, empresa.TEL_DOS , empresa.LOGO, APROBADO, NOTIFICADO 
+        FROM certificado_curso 
+        INNER JOIN estudiantes ON estudiantes.DOCUMENTO = certificado_curso.ID_ESTUDIANTE
+        INNER JOIN instructor ON instructor.DOCUMENTO = certificado_curso.ID_INSTRUCTOR
+        INNER JOIN cursos ON cursos.ID = certificado_curso.ID_CURSO
+        INNER JOIN empresa ON empresa.ID_EMP = certificado_curso.ID_EMPRESA
+        WHERE ID_CER=:id_cer";
+        
+        $registro=$conexion->prepare($consulta);
+
+        $registro->execute(array(":id_cer"=>$buscar));
+        
+        
+        while ($fila=$registro->fetch(PDO::FETCH_ASSOC)){    
+        
+        //Datos firma docente
+        $this->SetY(198);
+        $this->Ln();
+        $this->AddFont('RobotoCondensed-Bold');
+        $this->SetFont('RobotoCondensed-Bold', '', 12);
+        $this->SetTextColor('31','77', '131');
+        $this->SetFillColor('31','77','131');
+        $this->Cell(75,1,'',0, '', 'C', true);
+        $this->Ln();
+        $this->Cell(110,5,utf8_decode(ucwords(strtolower($fila['NOM_INST'])).' '.ucwords(strtolower($fila['APE_INST']))),0, '');
+        
+        $this->Ln();
+        $this->AddFont('RobotoCondensed-Light');
+        $this->SetFont('RobotoCondensed-Light', '', 8);
+        $this->Cell(75,3,utf8_decode(ucwords(strtolower($fila['PROFESION']))),0, '');
+        $this->Ln();
+        $this->Cell(75,3,utf8_decode(ucwords(strtolower($fila['MATRICULA']))),0, '');
+        $this->Ln();
+        $this->Cell(75,3,utf8_decode(ucwords(strtolower($fila['ESPECIALIDAD']))),0, '');
+        }
     }// CIEERRE DEL HEADER
     
     function Footer() {
@@ -42,25 +82,7 @@ class pdf extends FPDF
             
         // Firma Docente   
         $this->Image('../../intranet/uploads/'.utf8_decode($fila['FIRMA']) , 10,185, 60, 20, 'PNG');
-        $this->SetY(192);
-        $this->Ln();
-        $this->AddFont('RobotoCondensed-Bold');
-        $this->SetFont('RobotoCondensed-Bold', '', 12);
-        $this->SetTextColor('31','77', '131');
-        $this->SetFillColor('31','77','131');
-        $this->Cell(75,1,'',0, '', 'C', true);
-        $this->Ln();
-        $this->Cell(110,5,utf8_decode(ucwords(strtolower($fila['NOM_INST'])).' '.ucwords(strtolower($fila['APE_INST']))),0, '');
-        
-        $this->Ln();
-        $this->AddFont('RobotoCondensed-Light');
-        $this->SetFont('RobotoCondensed-Light', '', 8);
-        $this->Cell(75,3,utf8_decode(ucwords(strtolower($fila['PROFESION']))),0, '');
-        $this->Ln();
-        $this->Cell(75,3,utf8_decode(ucwords(strtolower($fila['MATRICULA']))),0, '');
-        $this->Ln();
-        $this->Cell(75,3,utf8_decode(ucwords(strtolower($fila['ESPECIALIDAD']))),0, '');
-        
+                
         // Firma Docente 
         $this->SetY(188);
         $this->Setx(145);
@@ -157,7 +179,7 @@ $pdf->SetFont('RobotoCondensed-Bold', '', 16);
 $pdf->SetTextColor('31','77', '131');
 $pdf->Cell(50,6, utf8_decode('N° CERTIFICADO'), 0, '', 'R');
 $pdf->SetTextColor('253','195', '0');
-$pdf->Cell(40,6, utf8_decode('SLCAP'.$fila['SIGLA'].sprintf("%'.05d\n", $fila['CODIGO'])), 0, '', 'C');
+$pdf->Cell(40,6, utf8_decode('SLCAP'.$fila['SIGLA'].sprintf("%1$04d", $fila['CODIGO'])), 0, '', 'C');
 $pdf->SetTextColor('31','77', '131');
 $pdf->Cell(50,6, utf8_decode('FECHA APROBACIÓN:'), 0, '', 'C');
 $pdf->SetTextColor('253','195', '0');        

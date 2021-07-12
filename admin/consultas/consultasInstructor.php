@@ -14,10 +14,10 @@ $tabla="";
 if(isset($_POST['instructor']))
 {
 	$q=$_POST['instructor'];
-	$query="SELECT TIPO_DOC, tipo_documento.NOMBRE, DOCUMENTO, instructor.NOMBRE AS NOM_INT, APELLIDO
+	$query="SELECT ID_INST, TIPO_DOC, tipo_documento.NOMBRE, DOCUMENTO, instructor.NOMBRE AS NOM_INT, APELLIDO
                 FROM instructor 
                 INNER JOIN tipo_documento ON instructor.TIPO_DOC = tipo_documento.ID_DOC
-                WHERE DOCUMENTO LIKE :cc AND ACTIVO=1";
+                WHERE DOCUMENTO LIKE :cc AND ACTIVO=1 ORDER BY ID_INST DESC LIMIT 6";
         
             $stmt=$conexion->prepare($query);
             

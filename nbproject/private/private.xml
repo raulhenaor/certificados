@@ -14,8 +14,8 @@
         <group>
             <file>file:/C:/xampp/htdocs/servilog/admin/pdf/certificadoPdf.php</file>
             <file>file:/C:/xampp/htdocs/servilog/admin/pdf/certificadoPdfCursos.php</file>
-            <file>file:/C:/xampp/htdocs/servilog/js/peticionConsultas.js</file>
-            <file>file:/C:/xampp/htdocs/servilog/cursos.php</file>
+            <file>file:/C:/xampp/htdocs/servilog/js/funtionInstructor.js</file>
+            <file>file:/C:/xampp/htdocs/servilog/admin/registroCertificados.php</file>
         </group>
     </open-files>
 </project-private>

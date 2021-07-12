@@ -23,7 +23,7 @@ include ('../config/conexion.php');
         INNER JOIN instructor ON instructor.DOCUMENTO = certificado_curso.ID_INSTRUCTOR
         INNER JOIN cursos ON cursos.ID = certificado_curso.ID_CURSO
         INNER JOIN empresa ON empresa.ID_EMP = certificado_curso.ID_EMPRESA
-                                ORDER by ID_CER LIMIT 15")->fetchAll(PDO::FETCH_OBJ);
+                                ORDER by ID_CER DESC LIMIT 15")->fetchAll(PDO::FETCH_OBJ);
     
 ?>
 <div class="modal Modal">
@@ -31,68 +31,90 @@ include ('../config/conexion.php');
         <div class="modal-content ">
           <div class="modal-header">
             <div class="bodyModal ">  
-<form  action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataEstudiantes();">
-                                                <div class="iconoAct text-success"><i class="fas fa-edit"></i></div>
-                                                <h3>ACTUALIZAR DATOS DE ESTUDIANTE</h3><br>
-                                                <div class="row">
-                                                <div class="col-sm">
-                                                <label for="exampleFormControlInput1" class="form-label">TIPO DE DOCUMENTO:</label>
-                                                
-                                                <select class="form-select" id="tipo_doc" name="tipo_doc">
-                                                    <?php 
-                                                    include ('../config/conexion1.php');
-                                                    $consulta = mysqli_query($con, "SELECT ID_DOC,NOMBRE FROM tipo_documento");
-                                                        while ($valores = mysqli_fetch_row($consulta)){            
-                                                        echo '<option  value="'.$valores[0].'" >'.$valores[1].'</option>';
-                                                        
-                                                        }?>
-                                                </select>
-                                                </div>
-                                                <div class="col-sm">
-                                                <label for="exampleFormControlInput1" class="form-label">TIPO DE DOCUMENTO:</label>
-                                                
-                                                <select class="form-select" id="tipo_doc" name="tipo_doc">
-                                                    <?php 
-                                                    include ('../config/conexion1.php');
-                                                    $consulta = mysqli_query($con, "SELECT ID,NOMBRE,APELLIDO FROM estudiantes");
-                                                        while ($valores = mysqli_fetch_row($consulta)){            
-                                                        echo '<option  value="'.$valores[0].'" >'.$valores[1].''.$valores[2].'</option>';
-                                                        
-                                                        }?>
-                                                </select>
-                                                <label for="exampleFormControlInput1" class="form-label">NÚMERO DE DOCUMENTO:</label>
-                                                <input type="number" name="documento" id="documento" class="form-control" value="" placeholder="Registro del Bote"/><br> 
-                                                </div>
-                                                </div>
-                                                <label for="exampleFormControlInput1" class="form-label">NOMBRES:</label>
-                                                <input type="text" name="nombre" id="nombre" class="form-control" value="" placeholder="Nombre del Bote"/><br> 
-                                                
-                                                <label for="exampleFormControlInput1" class="form-label">APELLIDOS:</label>
-                                                <input type="text" name="apellido" id="apellido" class="form-control" value="" placeholder="Nombre de la Patente"/><br> 
-                                                
-                                                <label for="exampleFormControlInput1" class="form-label">CONTACTO:</label>
-                                                <input type="number" name="cel" id="cel" class="form-control" value="" placeholder="Nombre de la Patente"/><br> 
-                                                
+                    <form  action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataCertificados();">
+                     <div class="iconoAct text-success"><i class="fas fa-edit"></i></div>
+                    <h3>ACTUALIZAR REGISTRO CERTIFICADO</h3><br>
+                        <section id="tabla_resultado1">
+                       <!-- AQUI SE DESPLEGARA NUESTRA TABLA DE CONSULTA -->
+                        </section>     
+                        <div class="row">
+                    <div class="col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Seleccione el curso</label>
+                    
+                        <select class="form-select" id="id_curso1" name="id_curso1">
+	                    <?php 
+	                      include ('../config/conexion1.php');
+	                      $consulta = mysqli_query($con, "SELECT ID, NOMBRE_CURSO FROM cursos");
+	                        while ($valores = mysqli_fetch_row($consulta)){            
+	                        echo '<option  value="'.$valores[0].'" >'.$valores[1].'</option>';
+	                        
+	                        }?>
+                    </select>
+                        
+                        <div id="" class="form-text">Curso del estudiante.</div>
+                    </div>  
 
-                                                <label for="exampleFormControlInput1" class="form-label">EMAIL:</label> 
-                                                <input type="email" name="correo" id="correo" class="form-control" value="" placeholder="Nombre de la Patente"/><br> 
+                </div><!-- cierre row -->
+               <div class="row gy-5">
+                                     <div class="col-sm">
+                    <label for="exampleFormControlInput1" class="form-label">Ingrese Documento</label>
+                    <input type="text" class="form-control" name="id_estudiante1" id="busqueda1" placeholder="Buscar..." required="">    
+                    <div id="" class="form-text">Seleccione el estudiante</div>
+                    </div>  
+                   
+                    <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Instructor</label>
+                        <input type="text" class="form-control" name="id_instructor1" id="busquedaFamiliar1" placeholder="Buscar..." required="">
+                        <div id="" class="form-text">Seleccione el instructor</div>
+                       
+                    </div>
+                   </div><!-- cierre row -->   
+                
+                <div class="row gy-5">
+                   <div class="col col-sm">
+                    <label for="exampleFormControlInput1" class="form-label">Aprobó</label>
 
-                                                <label for="exampleFormControlInput1" class="form-label">ESTADO:</label>
-                                                <select name="activo" class="form-select" id="activo">
-                                                    <option value="0">BLOQUEADO</option>
-                                                    <option value="1">ACTIVO</option>
-                                                </select>
+                    <select class="form-select" aria-label="Default select example" name="aprobo1" id="aprobo1">                        
+                        <option value="1">Aprobó</option>
+                        <option value="2">No Aprobó</option>
+                    </select>
+                       
+                    </div>
+                    <div class="col col-sm">    
+                        <label for="exampleFormControlInput1" class="form-label">Fecha de Inicio</label>
+                       <input type="date" class="form-control" id="fecha_ini" name="fecha_ini" placeholder="" required="">
+                        <div id="" class="form-text">Fecha en la que inicio el curso.</div>
+                    </div>
+
+                </div><!-- cierre row -->  
+                
+                <div class="row gy-5">
+                   <div class="col col-sm">
+                        <label for="exampleFormControlInput1" class="form-label">Fecha de Aprobación</label>
+                        <input type="date" class="form-control" id="fechaapro1" name="fechaapro1" placeholder="" required="">
+                        <div id="" class="form-text">Fecha en la que aprobó el curso</div>
+                    </div>
+                    <div class="col col-sm">
+                    <label for="exampleFormControlInput1" class="form-label">Fecha de Vencimiento</label>
+                        <input type="date" class="form-control" id="fechaven1" name="fechaven1" placeholder="" required="">
+                        <div id="" class="form-text">Fecha en la que se vence el certificado</div>
+                    </div>
+
+                </div><!-- cierre row -->  
                                                 
-                                                <input type="hidden" name="id_estudiante" id="id_estudiante" value=""/>
-                                                <input type="hidden" name="action" value="addEstudiante"/>
+                                                <input type="hidden" name="id_certificado1" id="id_certificado1" value=""/>
+                                                <input type="hidden" name="action" value="addCertificado1"/>
                                                 <div class="alertAddProduct"></div>
                                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                                 <button type="submit" class="btn btn-outline-success">Actualizar</button>
                                                 <a href="#" class="closeModal btn btn-outline-success" onclick="closeModal();">Cerrar</a>
                                                 </div>
+
                                           </form> 
 
-                                          </div>
+                                          
+
+             </div>
           </div>
        </div>
     </div>
@@ -126,7 +148,7 @@ include ('../config/conexion.php');
                     </div>  
                     <div class="col-sm">
                     <label for="exampleFormControlInput1" class="form-label">Ingrese Documento</label>
-                    <input type="text" class="form-control" name="id_estudiante" id="busqueda" placeholder="Buscar...">    
+                    <input type="text" class="form-control" name="id_estudiante" id="busqueda" placeholder="Buscar..." required="">    
                     <div id="" class="form-text">Seleccione el estudiante</div>
                     </div>
                 </div><!-- cierre row -->
@@ -134,7 +156,7 @@ include ('../config/conexion.php');
                     <div class="col col-sm">
 
                         <label for="exampleFormControlInput1" class="form-label">Seleccione el Instructor</label>
-                        <input type="text" class="form-control" name="id_instructor" id="busquedaFamiliar" placeholder="Buscar...">
+                        <input type="text" class="form-control" name="id_instructor" id="busquedaFamiliar" placeholder="Buscar..." required="">
                         <div id="" class="form-text">Seleccione el instructor</div>
                        
                     </div>
@@ -159,7 +181,7 @@ include ('../config/conexion.php');
                     </div>
                     <div class="col col-sm">
                         <label for="exampleFormControlInput1" class="form-label">Seleccione Fecha de Aprobación</label>
-                        <input type="date" class="form-control" id="fechaapro" name="fechaapro" placeholder="" required="">
+                        <input type="date" class="form-control" id="fechaapro" name="fechaapro" placeholder="" >
                         <div id="" class="form-text">Fecha en la que aprobó el curso</div>
                     </div>
                 </div><!-- cierre row -->  
@@ -167,7 +189,7 @@ include ('../config/conexion.php');
                 <div class="row gy-5">
                     <div class="col col-sm">
                     <label for="exampleFormControlInput1" class="form-label">Seleccione Fecha de Vencimiento</label>
-                        <input type="date" class="form-control" id="fechaven" name="fechaven" placeholder="" required="">
+                        <input type="date" class="form-control" id="fechaven" name="fechaven" placeholder="">
                         <div id="" class="form-text">Fecha en la que se vence el certificado</div>
                     </div>
 
@@ -183,9 +205,7 @@ include ('../config/conexion.php');
         	<section id="tabla_resultado">
 		<!-- AQUI SE DESPLEGARA NUESTRA TABLA DE CONSULTA -->
 		</section
-                <section id="tabla_resultado_instruc">
-		<!-- AQUI SE DESPLEGARA NUESTRA TABLA DE CONSULTA -->
-		</section  
+  
         
                 <!--******************************Lista de Botes encabezado*****************************-->
      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -219,23 +239,23 @@ include ('../config/conexion.php');
               ?>
               <tr class="row<?php echo $data->ID_CER?>">
                   <td class="celTipodoc"><?php echo $data->SIGLA.$data->CODIGO?></td>
-                  <td class="celDocu"><?php echo $data->NOMBRE_CURSO?></td>
-                  <td class="celNombre"><?php echo $data->NOM_EST?></td>
-                  <td class="celApellido"><?php echo $data->NOM_INST?></td>
-                  <td class="celCelu"><?php echo $data->F_INCIAL?></td>
-                  <td class="celCorreo"><?php echo $data->F_APROBACION?></td>
-                  <td class="celEstado"><?php echo $data->F_VENCIMIENTO?></td>
-                  <td class="celEstado"><?php echo $data->APROBADO?></td>
+                  <td class="celNomCur"><?php echo $data->NOMBRE_CURSO?></td>
+                  <td class="celNomEst"><?php echo $data->NOM_EST?></td>
+                  <td class="celNomInst"><?php echo $data->NOM_INST?></td>
+                  <td class="celFinicial"><?php echo $data->F_INCIAL?></td>
+                  <td class="celFapro"><?php echo $data->F_APROBACION?></td>
+                  <td class="celFVenci"><?php echo $data->F_VENCIMIENTO?></td>
+                  <td class="celAprobado"><?php echo $data->APROBADO?></td>
                   <td>
                         <a class="btn btn-outline-success" product="" href="pdf/certificadoPdf.php?id_certificado=<?php echo $data->ID_CER?>">
                         <i class="fas fa-file-download"></i></a>
                     </td>
                     <td>
-                        <a class="add_estudiantes btn btn-outline-primary" id_estudiante="<?php echo $data->ID ?>" href="#">
+                        <a class="add_certificado btn btn-outline-primary" id_certificado="<?php echo $data->ID_CER ?>" href="#">
                         <i class="fas fa-edit"></i></a>
                     </td>
                     <td>
-                        <a class="del_estudiantes btn btn-outline-danger" id_estudiante="<?php echo $data->ID ?>" href="#">
+                        <a class="del_certificado btn btn-outline-danger" id_certificado="<?php echo $data->ID_CER ?>" href="#">
                         <i class="fas fa-trash-alt"></i></a>
                     </td>
               </tr>
