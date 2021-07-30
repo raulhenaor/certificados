@@ -156,16 +156,7 @@ include ('../config/conexion.php');
                     <div class="col col-sm">
 
                         <label for="exampleFormControlInput1" class="form-label">Seleccione el Instructor</label>
-                        
-                        <select class="form-select" name="id_instructor" id="busquedaFamiliar">
-	                    <?php 
-	                      include ('../config/conexion1.php');
-	                      $consulta = mysqli_query($con, "SELECT DOCUMENTO, NOMBRE, APELLIDO FROM instructor");
-	                        while ($valores = mysqli_fetch_row($consulta)){            
-	                        echo '<option  value="'.$valores[0].'" >'.$valores[1].' '.$valores[2].'</option>';
-	                        
-	                        }?>
-                     </select>
+                        <input type="text" class="form-control" name="id_instructor" id="busquedaFamiliar" placeholder="Buscar..." required="">
                         <div id="" class="form-text">Seleccione el instructor</div>
                        
                     </div>
@@ -225,7 +216,7 @@ include ('../config/conexion.php');
       </div>
                 
  <div class="container">
-    <div class="row">           
+      <div class="row">           
       <table class="table table-striped table-hover">
           <thead>
               <tr>

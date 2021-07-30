@@ -96,7 +96,7 @@ class pdf extends FPDF
         $this->Cell(128,4,utf8_decode('Verifique la auntenticidad de este certificado digitando el número de certificado'),0, '', 'C', false);
         $this->Ln();
         $this->Setx(150);
-        $this->Cell(10,4,utf8_decode('el'),0, '', 'R', false);
+        $this->Cell(10,4,utf8_decode('en'),0, '', 'R', false);
         $this->SetTextColor('253','195', '0'); 
         $this->Cell(38,4,utf8_decode(strtolower($fila['WEB'])),0, '', 'L', false);
         $this->SetTextColor('255','255', '255');

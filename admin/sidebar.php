@@ -6,7 +6,7 @@
           <div id="leftside-navigation" class="">
             <ul class=""><!-- //////////////////INICIO UL DE NAVGCION//////////////////// -->
                 <li class="linea">
-                <a href="#"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+                    <a href="index.php"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
               </li>
               
                     <li class="sub-menu linea">
@@ -45,6 +45,7 @@
                             <li class="nav-item"><a class="nav-link" href="consultaEstudiante.php">Consultar Estudiante</a></li>
                             <li class="nav-item"><a class="nav-link" href="consultaInstructor.php">Consultar Instructor</a></li>
                             <li class="nav-item"><a class="nav-link" href="consultaCertificado.php">Consultar Certificado</a></li>
+                            <li class="nav-item"><a class="nav-link" href="consultaCusosFecha.php">Consultar Cursos por Fecha</a></li>
                             
                         </ul>
                    </li><!--///////////////////CIERRE LI DE SUB MENU-->

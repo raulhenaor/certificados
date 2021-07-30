@@ -71,15 +71,22 @@
     height: 500px;*/
     
     	width: 100%;
-	max-width: 500px;
+	max-width: 1000px;
         padding: 50px; 
 	margin: 0 auto;
         border: 2px solid #1f4e82;
         
-         border-radius: 10px;
+        border-radius: 10px;
 	overflow: hidden;
 }
+.mitad{
+    width: 50%;
+    float: left;
+}
 
+.limpiarfloat{
+    clear: both;
+}
 .tituloCurso{
     text-align: center;
     
@@ -101,19 +108,20 @@ form .btn-color{
 
 @media screen and (max-width:800px) {
 
-  .main .texto1{
+  .mitad{
     width: 100%;
   }
-  aside {
 
-    width: 100%;
-  }
   
 }
 
 @media screen and (max-width: 400px) {
 
 .contenedor{
+    width: 100%;
+      }
+      
+      .mitad{
     width: 100%;
       }
 }

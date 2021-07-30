@@ -11,7 +11,19 @@ include 'nabvar-menu.php';
 include 'sidebar.php';
 ?> 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-<!--*************************************************************Copia para Contenido del main*****************************************************-->        
+<!--*************************************************************Copia para Contenido del main*****************************************************--> 
+<?php
+include ('../config/conexion.php');
+
+   
+         /*INICIO CONUSLTA PARA EL CRUD*/
+    $registro=$conexion->query("SELECT ID_CER, ID_CURSO,cursos.NOMBRE_CURSO, cursos.HORAS, cursos.SIGLA, CODIGO, ID_ESTUDIANTE, estudiantes.DOCUMENTO ,estudiantes.NOMBRE AS NOM_EST, estudiantes.APELLIDO AS APE_EST, estudiantes.CEL,estudiantes.CORREO, F_INCIAL,F_APROBACION, F_VENCIMIENTO, DATEDIFF(NOW(), F_VENCIMIENTO) AS DIASRESTADOS
+        FROM certificado_curso 
+        INNER JOIN estudiantes ON estudiantes.DOCUMENTO = certificado_curso.ID_ESTUDIANTE
+        INNER JOIN cursos ON cursos.ID = certificado_curso.ID_CURSO ORDER BY DIASRESTADOS")->fetchAll(PDO::FETCH_OBJ);
+    
+?>
+
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         
         <h1 class="h2">Dashboard</h1>
@@ -26,135 +38,47 @@ include 'sidebar.php';
           </button>
         </div>
       </div>
-
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-      <h2>Section title</h2>
+      <h2>Cursos Próximos a Vencer Últimos 30 días</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
-            </tr>
-          </thead>
+            <thead>
+              <tr>
+                <th>Certificado No</th>
+                <th>Nombre del Curso</th>
+                <th>Estudiante</th>
+                <th>Contacto</th>
+                <th>E-mail</th> 
+                <th>F.Aprobación</th>
+                <th>F. Vencimiento</th>
+                <th>Estado</th>
+ 
+              </tr>
+          </thead> 
           <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,002</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>text</td>
-              <td>random</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>placeholder</td>
-            </tr>
-            <tr>
-              <td>1,006</td>
-              <td>dashboard</td>
-              <td>illustrative</td>
-              <td>rich</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,007</td>
-              <td>placeholder</td>
-              <td>tabular</td>
-              <td>information</td>
-              <td>irrelevant</td>
-            </tr>
-            <tr>
-              <td>1,008</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,009</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,010</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,011</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,012</td>
-              <td>text</td>
-              <td>placeholder</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,013</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>visual</td>
-            </tr>
-            <tr>
-              <td>1,014</td>
-              <td>dashboard</td>
-              <td>illustrative</td>
-              <td>rich</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,015</td>
-              <td>random</td>
-              <td>tabular</td>
-              <td>information</td>
-              <td>text</td>
-            </tr>
-          </tbody>
+              <?php 
+              foreach ($registro as $data):
+                  
+                  $datetime1 = new DateTime("now");
+                    $datetime2 = new DateTime($data->F_VENCIMIENTO);
+                    $interval = $datetime1->diff($datetime2);
+                    
+                    if ($data->DIASRESTADOS>=-30 && $data->DIASRESTADOS<=0){
+                    
+              ?>
+              <tr class="row<?php echo $data->ID_CER?>">
+                  <td class="celTipodoc"><?php echo $data->SIGLA.$data->CODIGO?></td>
+                  <td class="celNomCur"><?php echo $data->NOMBRE_CURSO?></td>
+                  <td class="celNomEst"><?php echo $data->NOM_EST.' '.$data->APE_EST?></td>
+                  <td class="celFinicial"><?php echo $data->CEL?></td>
+                  <td class="celFinicial"><?php echo $data->CORREO?></td>
+                  <td class="celFapro"><?php echo $data->F_APROBACION?></td>
+                  <td class="celFVenci"><?php echo $data->F_VENCIMIENTO?></td>
+                  <td class="celAprobado"><?php echo $interval->format('%R%a días');?></td>
+              </tr>
+              <?php 
+                    }
+              endforeach; ?>
+          </tbody>    
         </table>
       </div>
 <!--*************************************************************Fin Copia del Contenido del Main*****************************************************-->  
