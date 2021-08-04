@@ -23,10 +23,13 @@ if(!empty($_POST)){
         
         exit();
     }
+   
+    
+    
   //Actualizar datos curso
  if($_POST['action'] == 'addUsuario'){
                 
-    if (!empty($_POST['id_usuario']) || !empty($_POST['tipo_doc']) || !empty($_POST['documento']) || !empty($_POST['nombre']) || !empty($_POST['apellido']) || !empty($_POST['correo']) || !empty($_POST['pass']) || !empty($_POST['activo']) || !empty($_POST['perfil']))
+    if (!empty($_POST['id_usuario']) || !empty($_POST['tipo_doc']) || !empty($_POST['documento']) || !empty($_POST['nombre']) || !empty($_POST['apellido']) || !empty($_POST['correo']) ||  !empty($_POST['activo']) || !empty($_POST['perfil']))
     {  
        
             $id_usuario = $_POST['id_usuario'];
@@ -35,12 +38,12 @@ if(!empty($_POST)){
             $nombre = $_POST['nombre'];
             $apellido= $_POST['apellido'];
             $correo =  $_POST['correo'];
-            $pass = $_POST['pass'];
+           
             $activo = $_POST['activo'];
             $perfil = $_POST['perfil'];
 
                         
-            $sql = mysqli_query($con, "UPDATE usuarios SET TIPO_DOC=$tipo_doc, CEDULA=$documento, CONTRASENA='$pass', NOMBRE='$nombre', APELLIDO='$apellido', CORREO='$correo', PERFIL=$perfil, ACTIVO=$activo WHERE ID_USU=$id_usuario");
+            $sql = mysqli_query($con, "UPDATE usuarios SET TIPO_DOC=$tipo_doc, CEDULA=$documento,  NOMBRE='$nombre', APELLIDO='$apellido', CORREO='$correo', PERFIL=$perfil, ACTIVO=$activo WHERE ID_USU=$id_usuario");
            
             if($sql)
                     {

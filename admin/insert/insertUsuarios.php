@@ -14,7 +14,7 @@ if (isset($_POST['enviando'])){
       $perfil = $_POST['perfil'];
       $activo = $_POST['activo'];
       
-  
+    $contra_cifrada=  password_hash($pass, PASSWORD_DEFAULT, array("cost"=>13));
  try{   
    
     $consulta="INSERT INTO usuarios (TIPO_DOC, CEDULA, CONTRASENA, NOMBRE, APELLIDO, CORREO, PERFIL, ACTIVO) VALUES "
@@ -22,7 +22,7 @@ if (isset($_POST['enviando'])){
     
     $resultado=$conexion->prepare($consulta);   
         
-    $resultado->execute(array(":tipo_doc"=>$tipo_doc, ":cc"=>$cc, ":pass"=>$pass,  ":nom"=>$nom, ":ape"=>$ape, ":correo"=>$correo, ":perfil"=>$perfil,  ":activo"=>$activo));    
+    $resultado->execute(array(":tipo_doc"=>$tipo_doc, ":cc"=>$cc, ":pass"=>$contra_cifrada,  ":nom"=>$nom, ":ape"=>$ape, ":correo"=>$correo, ":perfil"=>$perfil,  ":activo"=>$activo));    
   
 
                      echo "<div class='container'>"; 

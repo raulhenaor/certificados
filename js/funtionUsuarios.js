@@ -47,6 +47,7 @@ $('.add_usuario').click(function(e){
          $('.Modal').fadeIn();
          
      });
+     
 
 
      $('.del_usuario').click(function(e){
@@ -104,11 +105,9 @@ $('.add_usuario').click(function(e){
 
 
 
-
 // Actualizar Boton empresas ************************************************************
 function sendDataUsuarios(){
-    
-   
+ 
      $.ajax({
             url:'update/UsuarioAjax.php',
             type:'POST',
@@ -201,9 +200,6 @@ function delUsu(){
 
 function closeModal(){
     $('.alertAddProduct').html('');
-    //Limpiar Formulario Limpiar
-    //$('#planilla').val('');
-    $('#empresa').val(4);
     
     $('.Modal').fadeOut();
     //location.reload();

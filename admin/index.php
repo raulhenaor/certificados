@@ -58,7 +58,7 @@ include ('../config/conexion.php');
               <?php 
               foreach ($registro as $data):
                   
-                  $datetime1 = new DateTime("now");
+                    $datetime1 = new DateTime("now");
                     $datetime2 = new DateTime($data->F_VENCIMIENTO);
                     $interval = $datetime1->diff($datetime2);
                     
@@ -81,6 +81,49 @@ include ('../config/conexion.php');
           </tbody>    
         </table>
       </div>
+      
+      <?php
+    include ('../config/conexion.php');
+
+    
+ $registro=$conexion->query("SELECT ID_CER, ID_CURSO,cursos.NOMBRE_CURSO, cursos.HORAS, cursos.SIGLA, CODIGO, ID_ESTUDIANTE, estudiantes.DOCUMENTO ,estudiantes.NOMBRE AS NOM_EST, estudiantes.APELLIDO AS APE_EST, estudiantes.CEL,estudiantes.CORREO, F_INCIAL,F_APROBACION, F_VENCIMIENTO, DATEDIFF(NOW(), F_VENCIMIENTO) AS DIASRESTADOS
+                FROM certificado_curso 
+                INNER JOIN estudiantes ON estudiantes.DOCUMENTO = certificado_curso.ID_ESTUDIANTE
+                INNER JOIN cursos ON cursos.ID = certificado_curso.ID_CURSO 
+                WHERE DATEDIFF(NOW(), F_VENCIMIENTO) = -30
+                ORDER BY DIASRESTADOS")->fetchAll(PDO::FETCH_OBJ);
+               
+               if($registro){
+               
+               //$texto_mail="Prueba del envío";
+               $destinatario="jhon.e.mantilla@gmail.com";
+               $asunto="Notificación Cursos Por Vencer";
+                  
+               foreach ($registro as $data): 
+                   
+                   $mensaje= '<table BORDER CELLPADDING=10 CELLSPACING=0 style="color:red"><tr><td>'. $data->NOMBRE_CURSO .'</td><td>'. $data->NOM_EST.'</td><td>'.$data->APE_EST . '</td><td>' . $data->CEL .'</td><td>'.$data->CORREO .'</td><tr></table>';
+                   
+               endforeach;
+               
+         
+                    $header="MIME-Version: 1.0\r\n";
+                    $header.="Content-type: text/html; charset=utf8\r\n";
+                    $header.="From: Prueba Jhon < kaiser_4tu@hotmail.com >\r\n";
+                    $exito=  mail($destinatario, $asunto, $mensaje, $header);
+         
+            
+                        
+                        
+                   
+               }//Condicion del if
+    
+              
+               
+     
+          
+           
+
+      ?>
 <!--*************************************************************Fin Copia del Contenido del Main*****************************************************-->  
     </main>
   </div>

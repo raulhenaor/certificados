@@ -31,7 +31,7 @@ include ('../config/conexion.php');
         <div class="modal-content ">
           <div class="modal-header">
             <div class="bodyModal ">  
-<form  action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataUsuarios();">
+                <form  action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault(); sendDataUsuarios();">
                                                 <div class="iconoAct text-success"><i class="fas fa-edit"></i></div>
                                                 <h3>ACTUALIZAR DATOS DE USUARIO</h3><br>
                                                 <div class="row">
@@ -94,6 +94,7 @@ include ('../config/conexion.php');
     </div>
   </div>
 
+
         <!--******************************Encabezado*****************************-->
      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         
@@ -149,7 +150,7 @@ include ('../config/conexion.php');
                    
                     <div class="col col-sm">
                         <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
-                        <input type="text" class="form-control" id="contrasena" name="contrasena" placeholder="Digite su Contraseña" required="">
+                        <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Digite su Contraseña" required="">
                         <div id="" class="form-text">Ingrese la contraseña del usuario.</div>
                     </div>
                     
@@ -209,6 +210,7 @@ include ('../config/conexion.php');
                 <th>Perfil</th>
                 <th>Activo</th>
                 <th>Actualizar</th> 
+                <th>Password</th> 
                 <th>Eliminar</th> 
               </tr>
           </thead> 
@@ -245,6 +247,10 @@ include ('../config/conexion.php');
                     <td>
                         <a class="add_usuario btn btn-outline-primary" usuario="<?php echo $data->ID_USU ?>" href="#">
                         <i class="fas fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-primary" usuario="<?php echo $data->ID_USU ?>" href="actualizaPass.php?id=<?php echo $data->ID_USU?>">
+                        <i class="fas fa-lock"></i></a>
                     </td>
                     <td>
                         <a class="del_usuario btn btn-outline-danger" usuario="<?php echo $data->ID_USU ?>" href="#">
